@@ -1,2 +1,26 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<% #"My title is Home; provide that info to the layout" %>
+<% provide(:title, 'Home') %>
+	<div class="hero-unit">
+	  <h1>Flat Icon Recognition Test</h1>
+	  <br />
+	  <p>This website administers a brief test of your speed and accuracy in selecting graphical icons of different visual styles. After you finish the test, you will be given your results and shown how they compare to the entire sample population. You can also explore the aggregate results from all study participants and filter them based on icon style, age group, familiarity with Windows or Mac, and other factors.
+		</p>
+
+		<p>Before participating in this study, please read the following information sheet:
+
+		<ol>
+			<li>The purpose of this study is to identify whether certain specific visual factors of icon design style lead to faster, more accurate recognition by users than others. The principal investigator is Curt Arledge, a graduate student in the School of Information & Library Science at the University of North Carolina at Chapel Hill. You may contact the investigator with questions at <%= link_to "carledge@live.unc.edu", 'mailto:carledge@live.unc.edu' %>.
+			</li>
+			<li>You will first be shown 20 icons with name labels and given as much time as you need to become familiar with them. Most icons should already be familiar from everyday computer use.
+			</li>
+			<li>Next, you will complete 24 successive “search and select” trials. Each trial will begin by showing you a prompt with the name of a particular icon from the set of 20 you just saw. When you are ready, you will be shown a randomized array of all 20 icons. Balancing speed and accuracy, select the icon that matches the name in the prompt.</li>
+			<li>After completing all 24 trials, you will be asked to answer a few brief questions about your age group and computer experience before being shown your results.</li>
+			<li>No personally identifying information will be recorded for use in this study.</li>
+			<li>The test takes about 5-10 minutes.</li>
+			<li>You may stop taking the test at any time, but your results will not be saved. It is not possible to resume the test once your browser has navigated away.</li>
+			<li>You are free to use the same computer and web browser to take the test multiple times, however it is preferred that each individual participant take the test only once.</li>
+		</ol>
+	  <p>By selecting Begin the Test, you indicate that you are over 18 years of age and give your consent to participate in this study.
+	  </p>
+	  <%= link_to "Begin the test", '#', class: "btn btn-large btn-primary" %>
+	</div>
