@@ -1,0 +1,9 @@
+<p>Filled with dynamic content for each trial.</p>
+
+<% provide(:title, 'Trial x of 24') %>
+
+<% if @trial.sequence_order == 0 %>
+	<p>Test explanation</p>
+<% end %>
+
+<%= link_to "Next trial", trial_path() %>

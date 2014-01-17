@@ -1,5 +1,6 @@
 IconTestApp::Application.routes.draw do
   resources :sessions
+  resources :trials
   root 'sessions#new'
   
   # The priority is based upon order of creation: first created -> highest priority.
