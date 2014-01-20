@@ -11,21 +11,18 @@ class SessionsController < ApplicationController
 		@session.save
 
 		#Create 24 trials
-		@trials = Array.new
 		i = 0
 		solid = 6
 		hollow = 6
 		white_bg = 6
 		black_bg = 6
 		while i < 24 do
-			@trials.push (
-				@session.trials.create(:sequence_order => i)
-			)
+			@session.trials.create(:sequence_order => i)
 			i += 1
 		end
 
 		#Redirect to first trial
-		redirect_to @trials[0]
+		redirect_to @session.trials.find_by(sequence_order: 0)
 	end
 
 	def show

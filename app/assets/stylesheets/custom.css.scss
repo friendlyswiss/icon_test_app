@@ -40,3 +40,45 @@ input, textarea, select, .uneditable-input {
 input {
   height: auto !important;
 }
+/* pre-test-instructions */
+
+div#pre-test-instructions {
+  z-index: 11;
+  position: absolute;
+  margin:auto;
+  background: white;
+  height:100%;
+  width:100%;
+  div {
+    width:300px;
+    margin:100px auto 30px auto;
+  }
+  button {
+    display:block;
+    margin:auto;
+  }
+}
+
+/* #target-icon-box */
+
+div#target-icon-box {
+  z-index: 10;
+  position: absolute;
+  margin:auto;
+  background: white;
+  height:100%;
+  width:100%;
+  div {
+    width:300px;
+    margin:100px auto 30px auto;
+    h3 {
+      margin-top:20px;
+      margin-bottom:20px;
+    }
+  }
+  button {
+    display:block;
+    margin:auto;
+  }
+}
+

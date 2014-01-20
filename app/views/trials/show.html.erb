@@ -1,9 +1,34 @@
-<p>Filled with dynamic content for each trial.</p>
+<% display_sequence = @trial.sequence_order + 1 %>
+<% next_trial = Trial.find_by(id: + @trial.id + 1) %>
 
-<% provide(:title, 'Trial x of 24') %>
+<% provide(:title, "Trial #{display_sequence} of 24") %>
 
+<% #Show pre-test instructions before first trial %>
 <% if @trial.sequence_order == 0 %>
-	<p>Test explanation</p>
+	<div id="pre-test-instructions">
+		<div>
+			<h3>The Icons</h3>
+			<p>These are the pre-test instructions. You are shown all 20 icons and given as much time as needed to memorize them</p>
+			<button id="test-start" class="btn btn-default">Start Test</button>
+		</div>
+	</div>
 <% end %>
 
-<%= link_to "Next trial", trial_path() %>
+<% #Show target icon before each trial %>
+<% #Clicking start hides target icon box and starts timer %>
+<div id="target-icon-box">
+	<div>
+		<h4>Trial <%= "#{display_sequence}" %> of 24</h4>
+		<p>When you are ready, press Start to begin the trial. A word will appear in the center of the screen surrounded by 20 different icons. Balancing speed and accuracy, select the icon that matches this word:</p>
+		<h3 class="text-center">Home</h3>
+		<button id="trial-start" class="btn btn-default">Start</button>
+	</div>
+</div>
+
+<% #Circle array of 20 icons %>
+
+<%= link_to image_tag("rails.png"), next_trial %>
+
+<% #For debugging %>
+<p><%= @trial.inspect %></p>
+
