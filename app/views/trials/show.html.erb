@@ -1,10 +1,16 @@
-<% display_sequence = @trial.sequence_order + 1 %>
-<% next_trial = Trial.find_by(id: + @trial.id + 1) %>
+<% i = 0 %>
+<% form_num = (1..20).to_a.shuffle %>
+<% position = (1..20).to_a.shuffle %>
+<% if @trial.sequence_order < 24 %>
+	<% next_trial = Trial.find_by(id: + @trial.id + 1) %>
+<% else %>
+	<% next_trial = edit_session_path(@trial.session_id) %>
+<% end %>
 
-<% provide(:title, "Trial #{display_sequence} of 24") %>
+<% provide(:title, "Trial #{@trial.sequence_order} of 24") %>
 
 <% #Show pre-test instructions before first trial %>
-<% if @trial.sequence_order == 0 %>
+<% if @trial.sequence_order == 1 %>
 	<div id="pre-test-instructions">
 		<div>
 			<h3>The Icons</h3>
@@ -18,7 +24,7 @@
 <% #Clicking start hides target icon box and starts timer %>
 <div id="target-icon-box">
 	<div>
-		<h4>Trial <%= "#{display_sequence}" %> of 24</h4>
+		<h4>Trial <%= "#{@trial.sequence_order}" %> of 24</h4>
 		<p>When you are ready, press Start to begin the trial. A word will appear in the center of the screen surrounded by 20 different icons. Balancing speed and accuracy, select the icon that matches this word:</p>
 		<h3 class="text-center">Home</h3>
 		<button id="trial-start" class="btn btn-default">Start</button>
@@ -26,9 +32,12 @@
 </div>
 
 <% #Circle array of 20 icons %>
-
-<%= link_to image_tag("rails.png"), next_trial %>
+<% #Each icon eventually needs to send a POST with time/success value %>
+<div id="icon-array">
+	<% #while i < 20 %>
+		<%= link_to image_tag("form#{form_num[i]}-#{@trial.style}-#{@trial.color}.png"), next_trial, :class => "p#{position[i]}" %>
+	<% #end %>
+</div>
 
 <% #For debugging %>
-<p><%= @trial.inspect %></p>
-
+<div class="debugger"><%= @trial.inspect %></div>
