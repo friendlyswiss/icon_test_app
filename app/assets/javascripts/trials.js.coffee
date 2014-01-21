@@ -11,3 +11,4 @@ $ ->
 	$(".icon").mouseup ->
 		end_time = new Date().getTime();
 		duration = end - start;
+		#if ".target" selected, record success

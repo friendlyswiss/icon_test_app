@@ -82,14 +82,24 @@ div#target-icon-box {
   }
 }
 
-//Debug text
+/* Debug text */
 .debugger {
   position:absolute;
   top: 300px;
 }
 
+/* Icons */
 #icon-array {
-  width:350px;
+  width:366px;
   height:280px;
   margin:auto;
+}
+
+/* Homepage */
+div.homepage {
+  width:500px;
+  padding: 20px;
+  li {
+    font-size:12px;
+  }
 }

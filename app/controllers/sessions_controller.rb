@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
 		#Create 24 trials
 		i = 0
-		form = Array.new(4, rand(1..20)).concat((1..20).to_a.shuffle)
+		form = ((1..20).to_a.sample 4).concat((1..20).to_a.shuffle)
 		style = Array.new(2, "solid").concat(Array.new(2, "hollow")).shuffle.concat(Array.new(10, "solid").concat(Array.new(10, "hollow")).shuffle)
 		color = Array.new(2, "white_bg").concat(Array.new(2, "black_bg")).shuffle.concat(Array.new(10, "white_bg").concat(Array.new(10, "black_bg")).shuffle)
 

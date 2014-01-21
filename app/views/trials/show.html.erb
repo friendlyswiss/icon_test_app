@@ -1,6 +1,7 @@
 <% i = 0 %>
-<% form_num = (1..20).to_a.shuffle %>
 <% position = (1..20).to_a.shuffle %>
+<% form_num = (1..20).to_a.shuffle %>
+
 <% if @trial.sequence_order < 24 %>
 	<% next_trial = Trial.find_by(id: + @trial.id + 1) %>
 <% else %>
@@ -26,7 +27,7 @@
 	<div>
 		<h4>Trial <%= "#{@trial.sequence_order}" %> of 24</h4>
 		<p>When you are ready, press Start to begin the trial. A word will appear in the center of the screen surrounded by 20 different icons. Balancing speed and accuracy, select the icon that matches this word:</p>
-		<h3 class="text-center">Home</h3>
+		<h3 class="text-center"><%= "#{@trial.target_form}"%></h3>
 		<button id="trial-start" class="btn btn-default">Start</button>
 	</div>
 </div>
@@ -34,9 +35,16 @@
 <% #Circle array of 20 icons %>
 <% #Each icon eventually needs to send a POST with time/success value %>
 <div id="icon-array">
-	<% #while i < 20 %>
-		<%= link_to image_tag("form#{form_num[i]}-#{@trial.style}-#{@trial.color}.png"), next_trial, :class => "p#{position[i]}" %>
-	<% #end %>
+	<% while i < 20 %>
+		<% if @trial.target_form == form_num[i].to_s %>
+			<% classes = "p#{position[i]} target" %>
+		<% else %>
+			<% classes = "p#{position[i]}" %>
+		<% end %>
+
+		<%= link_to image_tag("form#{form_num[i]}-#{@trial.style}-#{@trial.color}.png"), next_trial, :class => classes %>
+		<% i += 1 %>
+	<% end %>
 </div>
 
 <% #For debugging %>
