@@ -2,6 +2,8 @@
 
 /* mixins, variables, etc. */
 
+$icon-radius: 0px;
+
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -46,6 +48,7 @@ div#test-area {
   position:relative;
   background:white;
   width: 900px;
+  min-width: 670px;
   height:100%;
   margin:20px auto 0 auto;
 }
@@ -74,16 +77,19 @@ div#pre-test-instructions {
   background: white;
   width:900px;
   height:670px;
-  div {
-    width:400px;
-    padding:50px;
-    background:#ddd;
-    margin:80px auto 30px auto;
-  }
   button {
     display:block;
     margin:auto;
   }
+}
+
+/* Grey boxes */
+
+.grey-box {
+  width:400px;
+    padding:50px;
+    background:#ddd;
+    margin:80px auto 30px auto;
 }
 
 /* #target-icon-box */
@@ -94,15 +100,9 @@ div#target-icon-box {
   background: white;
   width:900px;
   height:670px;
-  div {
-    width:400px;
-    padding:50px;
-    background:#ddd;
-    margin:80px auto 30px auto;
-    h3 {
-      margin-top:20px;
-      margin-bottom:20px;
-    }
+  h3 {
+    margin-top:20px;
+    margin-bottom:20px;
   }
   button {
     display:block;
@@ -110,12 +110,21 @@ div#target-icon-box {
   }
 }
 
+/* Target Word */
+
+div#target-word {
+  position:relative;
+  margin:auto;
+  top:323px;
+  width: 200px;
+}
+
 /* Debug text */
 
 .debugger {
-  position:absolute;
-  top: 300px;
-  left: 300px;
+  position:relative;
+  margin:auto;
+  top:-300px;
   width: 300px;
 }
 
@@ -129,103 +138,108 @@ div#target-icon-box {
   margin:auto;
 }
 
+input[type="image"] {
+  border:none;
+}
+
+
 .p1 {
   position:absolute;
-  left:300px;
+  left:300px-$icon-radius;
   top:0px;
 }
 .p2 {
   position:absolute;
-  left:392.705px;
+  left:392.705px-$icon-radius;
   top:14.683px;
 }
 .p3 {
   position:absolute;
-  left:476.336px;
+  left:476.336px-$icon-radius;
   top:57.295px;
 }
 .p4 {
   position:absolute;
-  left:542.705px;
+  left:542.705px-$icon-radius;
   top:123.664px;
 }
 .p5 {
   position:absolute;
-  left:585.317px;
+  left:585.317px-$icon-radius;
   top:207.295px;
 }
 .p6 {
   position:absolute;
-  left:600px;
+  left:600px-$icon-radius;
   top:300px;
 }
 .p7 {
   position:absolute;
-  left:585.317px;
+  left:585.317px-$icon-radius;
   top:392.705px;
 }
 .p8 {
   position:absolute;
-  left:542.705px;
+  left:542.705px-$icon-radius;
   top:476.336px;
 }
 .p9 {
   position:absolute;
-  left:476.336px;
+  left:476.336px-$icon-radius;
   top:542.705px;
 }
 .p10 {
   position:absolute;
-  left:392.705px;
+  left:392.705px-$icon-radius;
   top:585.317px;
 }
 .p11 {
   position:absolute;
-  left:300px;
+  left:300px-$icon-radius;
   top:600px;
 }
 .p12 {
   position:absolute;
-  left:207.295px;
+  left:207.295px-$icon-radius;
   top:585.317px;
 }
 .p13 {
   position:absolute;
-  left:123.664px;
+  left:123.664px-$icon-radius;
   top:542.705px;
 }
 .p14 {
   position:absolute;
-  left:57.295px;
+  left:57.295px-$icon-radius;
   top:476.336px;
 }
 .p15 {
   position:absolute;
-  left:14.683px;
+  left:14.683px-$icon-radius;
   top:392.705px;
 }
 .p16 {
   position:absolute;
-  left:0px;
+  left:0px-$icon-radius;
   top:300px;
 }
 .p17 {
   position:absolute;
-  left:14.683px;
+  left:14.683px-$icon-radius;
   top:207.295px;
 }
 .p18 {
   position:absolute;
-  left:57.295px;
+  left:57.295px-$icon-radius;
   top:123.664px;
 }
 .p19 {
   position:absolute;
-  left:123.664px;
+  left:123.664px-$icon-radius;
   top:57.295px;
 }
 .p20 {
   position:absolute;
-  left:207.295px;
+  left:207.295px-$icon-radius;
   top:14.683px;
 }

@@ -1,21 +1,20 @@
 <% provide(:title, "Complete the Test") %>
 
-<h3>Complete the Test</h3>
-
-<div class="row">
-  <div class="span6 offset3">
+<div class="grey-box">
+  <h3>Complete the Test</h3>
+  <div>
     <%= form_for(@session) do |f| %>
 
-      <%= f.label :age %>
+      <%= f.label "Age Range" %>
       <%= f.text_field :age %>
 
-      <%= f.label :years_exp %>
+      <%= f.label "Approximate years of experience with computers" %>
       <%= f.text_field :years_exp %>
       
-      <%= f.label :primary_browser %>
+      <%= f.label "The desktop web browser you are most comfortable using" %>
       <%= f.text_field :primary_browser %>
 
-      <%= f.label :primary_os %>
+      <%= f.label "The desktop operating system you are most comfortable using" %>
       <%= f.text_field :primary_os %>
 
       <%= f.submit "Submit and View Results", class: "btn btn-large btn-primary" %>

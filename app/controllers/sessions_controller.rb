@@ -13,13 +13,18 @@ class SessionsController < ApplicationController
 		#Create 24 trials
 		i = 0
 		form = ((1..20).to_a.sample 4).concat((1..20).to_a.shuffle)
-		style_color = 
-			Array[Array["solid", "white_bg"], Array["hollow", "white_bg"], Array["solid", "black_bg"], Array["hollow", "black_bg"]].shuffle.concat(
-				Array.new(5, Array["solid", "white_bg"]).concat(
-				Array.new(5, Array["hollow", "white_bg"])).concat(
-				Array.new(5, Array["solid", "black_bg"])).concat(
-				Array.new(5, Array["hollow", "black_bg"])).shuffle
-			)
+		
+		style_color = Array[
+				Array["solid", "white_bg"],
+				Array["hollow", "white_bg"],
+				Array["solid", "black_bg"],
+				Array["hollow", "black_bg"]
+				].shuffle.concat(
+					Array.new(5, Array["solid", "white_bg"]).concat(
+					Array.new(5, Array["hollow", "white_bg"])).concat(
+					Array.new(5, Array["solid", "black_bg"])).concat(
+					Array.new(5, Array["hollow", "black_bg"])).shuffle
+				)
 
 		while i < 24 do
 			@session.trials.create(:sequence_order => i + 1, :target_form => form[i], :style => style_color[i][0], :color => style_color[i][1])
