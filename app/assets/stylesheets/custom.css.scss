@@ -77,9 +77,17 @@ div#pre-test-instructions {
   background: white;
   width:900px;
   height:670px;
+  img {
+    width:70px;
+  }
   button {
     display:block;
     margin:auto;
+  }
+  div {
+    width:560px;
+    padding:50px;
+    margin:80px auto 30px auto;
   }
 }
 
@@ -87,9 +95,9 @@ div#pre-test-instructions {
 
 .grey-box {
   width:400px;
-    padding:50px;
-    background:#ddd;
-    margin:80px auto 30px auto;
+  padding:50px;
+  background:#ddd;
+  margin:80px auto 30px auto;
 }
 
 /* #target-icon-box */
@@ -140,6 +148,10 @@ div#target-word {
 
 input[type="image"] {
   border:none;
+  width:70px;
+  &:focus {
+    outline:none;
+  }
 }
 
 

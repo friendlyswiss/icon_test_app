@@ -3,9 +3,15 @@
 <% #Show pre-test instructions before first trial %>
 <% if @trial.sequence_order == 1 %>
 	<div id="pre-test-instructions">
-		<div class="grey-box">
+		<div>
 			<h3>The Icons</h3>
 			<p>These are the pre-test instructions. You are shown all 20 icons and given as much time as needed to memorize them</p>
+			<% i = 1 %>
+			<% 20.times do %>
+				<%= image_tag("form#{i}-solid-white_bg.png") %>
+				<%= image_tag("form#{i}-hollow-white_bg.png") %>
+				<% i += 1 %>
+			<% end %>
 			<button id="test-start" class="btn btn-default">Start Test</button>
 		</div>
 	</div>
@@ -47,8 +53,5 @@
 
 		<% i += 1 %>
 	<% end %>
-	<div id="target-word"><h3 class="text-center"><%= "#{@trial.target_form}" %></h3></div>
+	<div id="target-word"><h2 class="text-center"><%= "#{@trial.target_form}" %></h3></div>
 </div>
-
-<% #For debugging %>
-<div class="debugger"><%= @trial.inspect %></div>
