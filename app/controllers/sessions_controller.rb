@@ -45,6 +45,13 @@ class SessionsController < ApplicationController
 
 	def update
 		@session = Session.find(params[:id])
+		@session.update_attributes(session_params)
 		redirect_to @session
 	end
+
+	private
+
+	def session_params
+    params.require(:session).permit(:test_browser, :test_os, :test_device, :primary_os, :primary_mobile, :age, :years_exp, :success_rate)
+  end
 end

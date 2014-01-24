@@ -2,21 +2,22 @@
 
 <div class="grey-box">
   <h3>Complete the Test</h3>
+  <p>You have completed all trials in the test. In order to save and view your results, please complete this brief questionnaire.</p>
   <div>
     <%= form_for(@session) do |f| %>
 
-      <%= f.label "Age Range" %>
-      <%= f.text_field :age %>
-
-      <%= f.label "Approximate years of experience with computers" %>
-      <%= f.text_field :years_exp %>
+      <h5>Your age range:</h5>
+      <%= f.select(:age, [["18–25","18-25"],["26–40","26-40"],["41–60","41-60"],["Above 60",">60"]],{prompt: true},:required => true) %>
       
-      <%= f.label "The desktop web browser you are most comfortable using" %>
-      <%= f.text_field :primary_browser %>
-
-      <%= f.label "The desktop operating system you are most comfortable using" %>
-      <%= f.text_field :primary_os %>
-
+      <h5>Your approximate years of experience with computers:</h5>
+      <%= f.select(:years_exp, [["Less than 5 years","<5"],["Between 6 and 15 years","6-15"],["Between 16 and 25 years","16-25"],["More than 25 years",">25"]],{prompt: true},:required => true) %>
+      
+      <h5>The desktop operating system you are most comfortable using:</h5>
+      <%= f.select(:primary_os, [["Windows","windows"],["Mac","mac"],["Linux","linux"],["Other","other"],["I don't know","dont-know"]],{prompt: true},:required => true) %>
+      
+      <h5>The mobile device operating system you are most comfortable using:</h5>
+      <%= f.select(:primary_mobile, [["iPhone/iOS","ios"],["Android","android"],["Windows Mobile","windows-mobile"],["BlackBerry","blackberry"],["Other","other"],["I don't know","dont-know"],["I don't use a mobile device","no-device"]],{prompt: true},:required => true) %>
+      
       <%= f.submit "Submit and View Results", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117221548) do
+ActiveRecord::Schema.define(version: 20140124024540) do
 
   create_table "sessions", force: true do |t|
     t.datetime "created_at"
@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 20140117221548) do
     t.string   "test_os"
     t.string   "test_device"
     t.string   "age"
-    t.string   "primary_browser"
     t.string   "primary_os"
     t.integer  "years_exp"
     t.float    "success_rate"
+    t.string   "primary_mobile"
   end
 
   create_table "trials", force: true do |t|
@@ -31,12 +31,11 @@ ActiveRecord::Schema.define(version: 20140117221548) do
     t.string   "target_form"
     t.string   "style"
     t.string   "color"
-    t.datetime "task_start"
-    t.datetime "task_end"
     t.boolean  "task_success"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "session_id"
+    t.integer  "task_time"
   end
 
 end

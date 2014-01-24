@@ -35,20 +35,19 @@
 <div id="icon-array">
 	<% while i < 20 %>
 		<% if @trial.target_form == form_num[i].to_s %>
-			<% classes = "p#{position[i]} target" %>
+			<% classes = "icon p#{position[i]} target" %>
 			<% task_success = true %>
 		<% else %>
-			<% classes = "p#{position[i]}" %>
+			<% classes = "icon p#{position[i]}" %>
 			<% task_success = false %>
 		<% end %>
 		
-		<%=form_for @trial do |f| %>
+		<%=form_for @trial, remote: true, authenticity_token: true do |f| %>
 			
-			<% #f.hidden_field :task_start %>
-			<% #f.hidden_field :task_end %>
+			<%= f.hidden_field :task_time, class: "task-time" %>
 			<%= f.hidden_field :task_success, :value => task_success %>
 
-      <%= image_submit_tag("form#{form_num[i]}-#{@trial.style}-#{@trial.color}.png", class: classes) %>
+      <%= image_submit_tag("form#{form_num[i]}-#{@trial.style}-#{@trial.color}.png", class: "#{classes}") %>
 		<% end %>
 
 		<% i += 1 %>

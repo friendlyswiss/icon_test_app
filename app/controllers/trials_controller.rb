@@ -20,6 +20,6 @@ class TrialsController < ApplicationController
 	private
 
 	def trial_params
-    params.require(:trial).permit(:task_success, :age)
+    params.require(:trial).permit(:task_success, :task_time)
   end
 end

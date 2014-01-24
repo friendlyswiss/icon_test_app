@@ -6,9 +6,10 @@ $ ->
 	$("#trial-start").mouseup ->
 		$("#target-icon-box").addClass("hide");
 		start_time = new Date().getTime();
-
-$ ->
-	$(".icon").mouseup ->
-		end_time = new Date().getTime();
-		duration = end - start;
-		#if ".target" selected, record success
+		console.log("Start time = " + start_time);
+		$(".icon").mouseup ->
+			end_time = new Date().getTime();
+			task_time = end_time-start_time;
+			$(".task-time").attr('value', task_time);
+			this.parentNode.submit();
+			console.log("Task time recorded: " + task_time);

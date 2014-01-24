@@ -1,1 +1,13 @@
-<h2>Results</h2>
+<% provide(:title, 'Your Results') %>
+<div>
+	<h2>Your Results</h2>
+	<h4>You selected <%= "#{@session.trials.where(task_success: true).count}"%> out of 24 icons correctly</h4>
+	<% i = 1 %>
+	<% 24.times do %>
+		<h4>Trial <%= "#{i}"%></h4>
+		<p><strong><%= "#{@session.trials.find_by(sequence_order: i).task_time}" %></strong> milliseconds</p>
+		<% i += 1 %>
+	<% end %>
+
+
+</div>
