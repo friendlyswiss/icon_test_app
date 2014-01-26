@@ -4,16 +4,18 @@ class TrialsController < ApplicationController
   end
 
   def show
-  	@trial = Trial.find(params[:id])
+  	@trial = Trial.friendly.find(params[:id])
   end
 
 	def update
-		@trial = Trial.find(params[:id])
+		@trial = Trial.friendly.find(params[:id])
 		@trial.update_attributes(trial_params)
 		if @trial.sequence_order < 24
-			redirect_to trial_path(@trial.id + 1)
+			next_trial = Trial.find(@trial.id + 1)
+			redirect_to trial_path(next_trial)
 		else
-			redirect_to edit_session_path(@trial.session_id)
+			session = Session.find(@trial.session_id)
+			redirect_to questionnaire_path(session)
 		end
 	end
 

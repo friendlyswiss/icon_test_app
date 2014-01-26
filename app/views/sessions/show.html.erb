@@ -1,5 +1,5 @@
-<% provide(:title, 'Your Results') %>
-<div>
+<% provide(:title, 'Results') %>
+<div id="results">
 	<h2>Your Results</h2>
 	<h4>You selected <%= "#{@session.trials.where(task_success: true).count}"%> out of 24 icons correctly</h4>
 	<% i = 1 %>

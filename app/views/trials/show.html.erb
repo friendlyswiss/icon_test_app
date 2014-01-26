@@ -2,14 +2,17 @@
 
 <% #Show pre-test instructions before first trial %>
 <% if @trial.sequence_order == 1 %>
-	<div id="pre-test-instructions">
-		<div>
+	<div class="scrim top">
+		<div id="pre-test-instructions">
 			<h3>The Icons</h3>
 			<p>These are the pre-test instructions. You are shown all 20 icons and given as much time as needed to memorize them</p>
 			<% i = 1 %>
 			<% 20.times do %>
-				<%= image_tag("form#{i}-solid-white_bg.png") %>
-				<%= image_tag("form#{i}-hollow-white_bg.png") %>
+				<% #<div> %>
+					<%= image_tag("form#{i}-solid-white_bg.png") %>
+					<%= image_tag("form#{i}-hollow-white_bg.png") %>
+					<% #{}"#{@trial.target_form(i)}" %>
+				<% #</div> %>
 				<% i += 1 %>
 			<% end %>
 			<button id="test-start" class="btn btn-default">Start Test</button>
@@ -17,17 +20,15 @@
 	</div>
 <% end %>
 
-<% #Clicking start hides target icon box and starts timer %>
-<div id="target-icon-box">
-	<div class="grey-box">
-		<h4>Trial <%= "#{@trial.sequence_order}" %> of 24</h4>
+<div class="scrim middle">
+	<div id="target-icon-box" class="grey-bg">
+		<h4 class="text-center">Trial <%= "#{@trial.sequence_order}" %> of 24</h4>
 		<p>When you are ready, press Start to begin the trial. A word will appear in the center of the screen surrounded by 20 different icons. Balancing speed and accuracy, select the icon that matches the word.</p>
 		<button id="trial-start" class="btn btn-default">Start</button>
 	</div>
 </div>
 
 <% #Circle array of 20 icons %>
-<% #Each icon eventually needs to send a POST with time/success value %>
 <% i = 0 %>
 <% position = (1..20).to_a.shuffle %>
 <% form_num = (1..20).to_a.shuffle %>

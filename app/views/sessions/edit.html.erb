@@ -1,10 +1,10 @@
 <% provide(:title, "Complete the Test") %>
 
-<div class="grey-box">
+<div id="questionnaire" class="grey-bg">
   <h3>Complete the Test</h3>
   <p>You have completed all trials in the test. In order to save and view your results, please complete this brief questionnaire.</p>
   <div>
-    <%= form_for(@session) do |f| %>
+    <%= form_for @session do |f| %>
 
       <h5>Your age range:</h5>
       <%= f.select(:age, [["18–25","18-25"],["26–40","26-40"],["41–60","41-60"],["Above 60",">60"]],{prompt: true},:required => true) %>
