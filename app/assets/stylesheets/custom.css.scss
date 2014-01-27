@@ -88,15 +88,29 @@ div.homepage {
 div.top {
   z-index: 11;
   div#pre-test-instructions {
-    width:530px;
+    width:740px;
     padding:40px 20px 0 20px;
     margin:0 auto;
-    img {
-      width:70px;
+    div.titled-icon{
+      display:inline-block;
+      width:144px;
+      margin-bottom:45px;
+      h5 {
+        margin-top:0;
+      }
+      div {
+        position:relative;
+        margin:auto;
+        width:110px;
+        img {
+          width:50px;
+          margin:auto;
+        }
+      }
     }
     button {
       display:block;
-      margin:auto;
+      margin:10px auto;
     }
   }
 }

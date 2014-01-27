@@ -5,6 +5,29 @@ class TrialsController < ApplicationController
 
   def show
   	@trial = Trial.friendly.find(params[:id])
+  	@trial_form = [
+  		"",
+  		"One",
+  		"Two",
+  		"Three",
+  		"Four",
+  		"Five",
+  		"Six",
+  		"Seven",
+  		"Eight",
+  		"Nine",
+  		"Ten",
+  		"Eleven",
+  		"Twelve",
+  		"Thirteen",
+  		"Fourteen",
+  		"Fifteen",
+  		"Sixteen",
+  		"Seventeen",
+  		"Eighteen",
+  		"Nineteen",
+  		"Twenty",
+  	]
   end
 
 	def update

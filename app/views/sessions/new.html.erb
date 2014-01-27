@@ -20,6 +20,6 @@
   <p>By selecting Begin the Test, you indicate that you are over 18 years of age and give your consent to participate in this study.
   </p>
   <%= form_for(@session) do |f| %>
-		<%= f.submit "Begin the test", class: "btn btn-large btn-primary" %>
+		<%= f.submit "Loading images...", class: "start-test btn btn-large btn-primary", disabled: true %>
 	<% end %>
 </div>

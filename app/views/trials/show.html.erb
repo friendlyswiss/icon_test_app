@@ -8,11 +8,13 @@
 			<p>These are the pre-test instructions. You are shown all 20 icons and given as much time as needed to memorize them</p>
 			<% i = 1 %>
 			<% 20.times do %>
-				<% #<div> %>
-					<%= image_tag("form#{i}-solid-white_bg.png") %>
-					<%= image_tag("form#{i}-hollow-white_bg.png") %>
-					<% #{}"#{@trial.target_form(i)}" %>
-				<% #</div> %>
+				<div class="titled-icon">
+					<div>
+						<%= image_tag("form#{i}-solid-white_bg.png") %>
+						<%= image_tag("form#{i}-hollow-white_bg.png") %>
+					</div>
+					<h5 class = "text-center"><%= "#{@trial_form[i]}" %></h5>
+				</div>
 				<% i += 1 %>
 			<% end %>
 			<button id="test-start" class="btn btn-default">Start Test</button>
@@ -53,5 +55,5 @@
 
 		<% i += 1 %>
 	<% end %>
-	<div id="target-word"><h2 class="text-center"><%= "#{@trial.target_form}" %></h3></div>
+	<div id="target-word"><h2 class="text-center"><%= "#{@trial_form[@trial.target_form.to_i]}" %></h3></div>
 </div>

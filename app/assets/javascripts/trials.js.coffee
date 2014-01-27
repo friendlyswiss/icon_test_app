@@ -1,5 +1,3 @@
-
-
 $ ->
 	$("#test-start").mouseup ->
 		$(".top").addClass("hide");

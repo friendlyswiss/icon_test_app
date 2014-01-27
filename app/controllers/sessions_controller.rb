@@ -42,6 +42,7 @@ class SessionsController < ApplicationController
 
 	def show
 		@session = Session.friendly.find(params[:id])
+		@total_sessions = Session.count
 	end
 
 	def edit
@@ -55,6 +56,10 @@ class SessionsController < ApplicationController
 	end
 
 	private
+
+	def completed?
+		
+	end
 
 	def session_params
     params.require(:session).permit(:test_browser, :test_os, :test_device, :primary_os, :primary_mobile, :age, :years_exp, :success_rate)
