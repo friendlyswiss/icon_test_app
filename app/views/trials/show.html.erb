@@ -23,7 +23,7 @@
 <% end %>
 
 <div class="scrim middle">
-	<div id="target-icon-box" class="grey-bg">
+	<div id="pre-trial-box" class="grey-bg">
 		<h4 class="text-center">Trial <%= "#{@trial.sequence_order}" %> of 24</h4>
 		<p>When you are ready, press Start to begin the trial. A word will appear in the center of the screen surrounded by 20 different icons. Balancing speed and accuracy, select the icon that matches the word.</p>
 		<button id="trial-start" class="btn btn-default">Start</button>
@@ -36,6 +36,10 @@
 <% form_num = (1..20).to_a.shuffle %>
 
 <div id="icon-array">
+	<% if @trial.color == "black_bg" %>
+		<div class="circle circle-top"></div>
+		<div class="circle circle-bottom"></div>
+	<% end %>
 	<% while i < 20 %>
 		<% if @trial.target_form == form_num[i].to_s %>
 			<% classes = "icon p#{position[i]} target" %>

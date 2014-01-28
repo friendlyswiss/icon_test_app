@@ -1,13 +1,34 @@
 <% provide(:title, 'Results') %>
+
 <div id="results">
+	
 	<h2>Your Results</h2>
+	
+	<% #Number Correct %>
 	<h4>You selected <%= "#{@session.trials.where(task_success: true).count}"%> out of 24 icons correctly</h4>
+
+	<% #Average Speed %>
+	<h4>Average speed</h4>
+	<p><strong><%= "#{(@session.trials.average("task_time") / 1000).round(3)}" %></strong> seconds</p>
+	
+	<% #Fastest Trial %>
+	<h4>Fastest Trial</h4>
+	<p><strong>Trial <%= "#{@session.trials.order("task_time ASC").first.sequence_order}" %>
+	<br />
+	<%= "#{@session.trials.minimum("task_time").to_f / 1000}"%></strong> seconds</p>
+	
+	<% #Slowest Trial %>
+	<h4>Slowest Trial</h4>
+	<p><strong>Trial <%= "#{@session.trials.order("task_time DESC").first.sequence_order}" %>
+	<br />
+	<%= "#{@session.trials.maximum("task_time").to_f / 1000}"%></strong> seconds</p>
+	
+	<% #Trial Times %>
 	<% i = 1 %>
 	<% 24.times do %>
-		<h4>Trial <%= "#{i}"%></h4>
-		<p><strong><%= "#{@session.trials.find_by(sequence_order: i).task_time}" %></strong> milliseconds</p>
-		<% i += 1 %>
+	<h4>Trial <%= "#{i}"%></h4>
+	<p><strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> seconds</p>
+	<% i += 1 %>
 	<% end %>
-
 
 </div>

@@ -94,7 +94,8 @@ div.top {
     div.titled-icon{
       display:inline-block;
       width:144px;
-      margin-bottom:45px;
+      margin-top:20px;
+      margin-bottom:25px;
       h5 {
         margin-top:0;
       }
@@ -110,16 +111,16 @@ div.top {
     }
     button {
       display:block;
-      margin:10px auto;
+      margin:20px auto;
     }
   }
 }
 
-/* Target Icon Box */
+/* Pre-trial Box */
 
 div.middle {
   z-index: 10;
-  div#target-icon-box {
+  div#pre-trial-box {
     width:400px;
     padding:50px;
     margin:190px auto 0 auto;
@@ -153,12 +154,36 @@ div#target-word {
   margin:auto;
   top:323px;
   width: 200px;
+  z-index:8;
+}
+
+.circle {
+  position:absolute;
+  border-radius:50%;
+}
+
+.circle-bottom {
+    background: #000;
+    width: 670px;
+    height: 670px;
+    z-index:3;
+}
+
+.circle-top {
+  background:#fff;
+  width: 530px;
+  height: 530px;
+  z-index:4;
+  left:70px;
+  top: 70px;
+
 }
 
 /* Icon Positioning */
 
 .icon {
   position:absolute;
+  z-index:5;
 }
 
 .p1 {
