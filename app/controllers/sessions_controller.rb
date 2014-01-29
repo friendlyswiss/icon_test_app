@@ -5,7 +5,8 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		@session = Session.new(params[:session])
+		@session = Session.new(session_params)
+
 		o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
 		rando = (0...6).map { o[rand(o.length)] }.join
 		@session.random_id = rando
@@ -62,6 +63,6 @@ class SessionsController < ApplicationController
 	end
 
 	def session_params
-    params.require(:session).permit(:test_browser, :test_os, :test_device, :primary_os, :primary_mobile, :age, :years_exp, :success_rate)
+    params.require(:session).permit(:test_browser, :test_os, :primary_os, :primary_mobile, :age, :years_exp, :success_rate)
   end
 end

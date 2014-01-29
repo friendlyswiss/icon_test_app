@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126010830) do
+ActiveRecord::Schema.define(version: 20140129140417) do
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20140126010830) do
     t.datetime "updated_at"
     t.string   "test_browser"
     t.string   "test_os"
-    t.string   "test_device"
     t.string   "age"
     t.string   "primary_os"
     t.integer  "years_exp"
