@@ -303,7 +303,7 @@ div#results {
     font-size:17.5px;
   }
   div.superlative-trial {
-    width: 300px;
+    width: 368px;
     float: left;
     margin-bottom: 70px;
     margin-top: 50px;
@@ -317,31 +317,40 @@ div#results {
   div.trials-list {
     clear:left;
     img {
-      width:18px;
-    }
-    p {
-      display:inline-block;
-      font-size:10px;
-      margin:8px 0;
+      width:30px;
+      display:block;
+      margin:auto;
     }
     div.warmup-trials {
-      width:122px;
-      padding:10px;
-      border: 1px dashed #ddd;
-      float:left;
+      background:#eee;
+      width:718px;
+      padding:5px 10px;
+      border: 1px dashed;
       p.warmup-notice {
-        color: #aaa;
-        font-size: 8px;
+        font-size: 10px;
         line-height: 12px;
+        margin:6px 0 8px 0;
       }
     }
     div.recorded-trials {
-      div.trial-col {
-        width:124px;
-        padding:10px;
-        float: left;
-        margin-left:4px;
+      margin-top:20px;
+      padding-top:10px;
+      > h4 {
+        padding-left:10px;
       }
+      div.trial-row {
+        width:720px;
+        padding:0 10px;
+        margin:15px 0;
+        float: left;
+      }
+    }
+  }
+  div.trial {
+    width: 175px;
+    display:inline-block;
+    h4 {
+      color:#777;
     }
   }
 }

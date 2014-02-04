@@ -37,35 +37,37 @@
 	<div class="trials-list">
 		
 		<div class="warmup-trials">
-			<% i = 1 %>
-			<% 4.times do %>
-			<%= image_tag("form#{@session.trials.find_by(sequence_order: i).target_form}-#{@session.trials.find_by(sequence_order: i).style}-#{@session.trials.find_by(sequence_order: i).color}.png") %>
-			<p><i>Trial <%= "#{i}"%>
-				<span class="spacer">__</span>
-				<strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> sec</i>
-			</p>
+			<h4>Warm-up Trials</h4>
+			<p class="warmup-notice"><i>The first four trials were warm-up trials. These will not be factored into the study data.</i></p>
+		<% i = 1 %>
+		<% 4.times do %>
+			<div class="trial">
+				<h4 class="text-center">Trial <%= "#{i}"%></h4>
+				<%= image_tag("form#{@session.trials.find_by(sequence_order: i).target_form}-#{@session.trials.find_by(sequence_order: i).style}-#{@session.trials.find_by(sequence_order: i).color}.png") %>
+				<p class="text-center"><i><strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> seconds</i></p>
+			</div>
 			<% i += 1 %>
-			<% end %>
-			<p class="warmup-notice"><i>The first four trials are warm-up trials. These are not recorded for this study.</i></p>
+		<% end %>
 		</div>
 		
 		<div class="recorded-trials">
-			<% i = 5 %>
-			<% 20.times do %>
-				<% if (i % 5) == 0 %>
-					<div class="trial-col">
-				<% end %>
-				<%= image_tag("form#{@session.trials.find_by(sequence_order: i).target_form}-#{@session.trials.find_by(sequence_order: i).style}-#{@session.trials.find_by(sequence_order: i).color}.png") %>
-				<p>Trial <%= "#{i}"%>
-					<span class="spacer">__</span>
-					<strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> sec
-				</p>
-				<br />
-				<% if ((i + 1) % 5) == 0 %>
-					</div>
-				<% end %>
-				<% i += 1 %>
+			<h4>Recorded Trials</h4>
+		<% i = 5 %>
+		<% 20.times do %>
+			<% if ((i - 1) % 4) == 0 %>
+				<div class="trial-row">
 			<% end %>
+					<div class="trial">
+						<h4 class="text-center">Trial <%= "#{i}"%></h4>
+						<%= image_tag("form#{@session.trials.find_by(sequence_order: i).target_form}-#{@session.trials.find_by(sequence_order: i).style}-#{@session.trials.find_by(sequence_order: i).color}.png") %>
+						<p class="text-center"><strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> seconds
+						</p>
+					</div>
+			<% if (i % 4) == 0 %>
+				</div>
+			<% end %>
+			<% i += 1 %>
+		<% end %>
 		</div>
 
 	</div><!-- .trials-list end -->
