@@ -2,41 +2,71 @@
 
 <div id="results">
 	
-	<h2>Your Results</h2>
+	<h2>Results</h2>
 
-	<p><%= "#{@session.inspect}"%>
-	</p>
+	<h3>Your Results</h3>
 	
 	<% #Number Correct %>
-	<h4>You selected <%= "#{@session.trials.where(task_success: true).count}"%> out of 24 icons correctly</h4>
-	<br />
-
-	<% #Average Speed %>
-	<h4>Average speed</h4>
-	<p><strong><%= "#{(@session.trials.average("task_time") / 1000).round(3)}" %></strong> seconds</p>
-	<br />
+	<p class="results-text">You selected <strong><%= "#{@session.trials.where(task_success: true).count}"%> out of 24</strong> icons correctly with an average speed of <strong><%= "#{(@session.trials.average("task_time") / 1000).round(3)}" %> seconds</strong>.</p>
 	
+	<% #Percentile Score %>
+
 	<% #Fastest Trial %>
-	<h4>Fastest Trial</h4>
-	<p><strong>Trial <%= "#{@session.trials.order("task_time ASC").first.sequence_order}" %>
-	<br />
-	<%= "#{@session.trials.minimum("task_time").to_f / 1000}"%></strong> seconds</p>
-	<br />
+	<% fastest = @session.trials.order("task_time ASC").first %>
+	<div class="superlative-trial fastest">
+		<h4>Fastest Trial</h4>
+		<%= image_tag("form#{fastest.target_form}-#{fastest.style}-#{fastest.color}.png") %>
+		<p>Trial <%= "#{fastest.sequence_order}" %>
+			<span class="spacer">___</span> 
+			<strong><%= "#{fastest.task_time.to_f / 1000}"%></strong> seconds
+		</p>
+	</div>
 	
 	<% #Slowest Trial %>
-	<h4>Slowest Trial</h4>
-	<p><strong>Trial <%= "#{@session.trials.order("task_time DESC").first.sequence_order}" %>
-	<br />
-	<%= "#{@session.trials.maximum("task_time").to_f / 1000}"%></strong> seconds</p>
-	<br />
+	<% slowest = @session.trials.order("task_time DESC").first %>
+	<div class="superlative-trial slowest">
+		<h4>Slowest Trial</h4>
+		<%= image_tag("form#{slowest.target_form}-#{slowest.style}-#{slowest.color}.png") %>
+		<p>Trial <%= "#{slowest.sequence_order}" %>
+			<span class="spacer">___</span> 
+			<strong><%= "#{slowest.task_time.to_f / 1000}"%></strong> seconds
+		</p>
+	</div>
 	
-	<% #Trial Times %>
-	<h4>Trial Times</h4>
-	<% i = 1 %>
-	<% 24.times do %>
-	<h5>Trial <%= "#{i}"%></h5>
-	<p><strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> seconds</p>
-	<% i += 1 %>
-	<% end %>
+	<% #Trial Times List %>
+	<div class="trials-list">
+		
+		<div class="warmup-trials">
+			<% i = 1 %>
+			<% 4.times do %>
+			<%= image_tag("form#{@session.trials.find_by(sequence_order: i).target_form}-#{@session.trials.find_by(sequence_order: i).style}-#{@session.trials.find_by(sequence_order: i).color}.png") %>
+			<p><i>Trial <%= "#{i}"%>
+				<span class="spacer">__</span>
+				<strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> sec</i>
+			</p>
+			<% i += 1 %>
+			<% end %>
+			<p class="warmup-notice"><i>The first four trials are warm-up trials. These are not recorded for this study.</i></p>
+		</div>
+		
+		<div class="recorded-trials">
+			<% i = 5 %>
+			<% 20.times do %>
+				<% if (i % 5) == 0 %>
+					<div class="trial-col">
+				<% end %>
+				<%= image_tag("form#{@session.trials.find_by(sequence_order: i).target_form}-#{@session.trials.find_by(sequence_order: i).style}-#{@session.trials.find_by(sequence_order: i).color}.png") %>
+				<p>Trial <%= "#{i}"%>
+					<span class="spacer">__</span>
+					<strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> sec
+				</p>
+				<br />
+				<% if ((i + 1) % 5) == 0 %>
+					</div>
+				<% end %>
+				<% i += 1 %>
+			<% end %>
+		</div>
 
-</div>
+	</div><!-- .trials-list end -->
+</div><!-- #results end -->

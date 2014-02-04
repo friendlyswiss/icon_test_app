@@ -1,3 +1,6 @@
+# Ignore precompilation
+public/assets
+
 # Ignore bundler config.
 /.bundle
 

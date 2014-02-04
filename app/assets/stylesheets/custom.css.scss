@@ -286,10 +286,68 @@ div#questionnaire {
 /* Results */
 
 div#results {
-  padding:20px;
+  padding:10px;
   width:740px;
   margin:20px auto;
+  .spacer {
+    color:#fff;
+  }
+  h2 {
+    margin-bottom: 60px;
+  }
+  h3 {
+    font-size: 22.5px;
+    margin-bottom: 20px;
+  }
+  p.results-text {
+    font-size:17.5px;
+  }
+  div.superlative-trial {
+    width: 300px;
+    float: left;
+    margin-bottom: 70px;
+    margin-top: 50px;
+    img {
+      width: 35px;
+    }
+    p {
+      display:inline;
+    }
+  }
+  div.trials-list {
+    clear:left;
+    img {
+      width:18px;
+    }
+    p {
+      display:inline-block;
+      font-size:10px;
+      margin:8px 0;
+    }
+    div.warmup-trials {
+      width:122px;
+      padding:10px;
+      border: 1px dashed #ddd;
+      float:left;
+      p.warmup-notice {
+        color: #aaa;
+        font-size: 8px;
+        line-height: 12px;
+      }
+    }
+    div.recorded-trials {
+      div.trial-col {
+        width:124px;
+        padding:10px;
+        float: left;
+        margin-left:4px;
+      }
+    }
+  }
 }
+
+
+
 
 /* Small Screen Scrim */
 
