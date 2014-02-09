@@ -11,9 +11,9 @@
 	<p class="results-text">You were faster than <strong>90%</strong> of all other participants.</p>
 
 	<% #Fastest Trials %>
-	<div class="superlative-trial">
+	<div class="superlative-trial fastest">
 		<h3>Fastest Trials</h3>
-		<div class="fastest trial">
+		<div class="fastest-trial trial">
 			<%= image_tag("form#{@fastest[0].target_form}-#{@fastest[0].style}-#{@fastest[0].color}.png") %>
 			<p><strong><%= "#{@fastest[0].task_time.to_f / 1000}"%></strong> seconds
 			<br />
@@ -31,9 +31,9 @@
 	</div>
 	
 	<% #Slowest Trials %>
-	<div class="superlative-trial">
+	<div class="superlative-trial slowest">
 		<h3>Slowest Trials</h3>
-		<div class="fastest trial">
+		<div class="slowest-trial trial">
 			<%= image_tag("form#{@slowest[0].target_form}-#{@slowest[0].style}-#{@slowest[0].color}.png") %>
 			<p><strong><%= "#{@slowest[0].task_time.to_f / 1000}"%></strong> seconds
 			<br />

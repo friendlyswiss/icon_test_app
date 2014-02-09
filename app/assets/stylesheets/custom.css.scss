@@ -81,8 +81,22 @@ div.homepage {
   position:relative;
   margin:20px auto 0 auto;
   width:600px;
-  li {
-    font-size:12px;
+  .eye-icon {
+    display:block;
+    margin:auto;
+    width:140px;
+  }
+  .info-sheet {
+    overflow:scroll;
+    resize:vertical;
+    margin-bottom:10px;
+    padding:10px;
+    border: 1px solid #ddd;
+    height:100px;
+    max-height: 370px;
+    li {
+      font-size:12px;
+    }
   }
   input[type="submit"] {
     display:block;
@@ -312,7 +326,7 @@ div#results {
     margin-bottom:30px;
   }
   div.superlative-trial {
-    width: 360px;
+    width: 300px;
     float: left;
     margin-bottom: 70px;
     margin-top: 50px;
@@ -324,11 +338,11 @@ div#results {
       display:inline-block;
       font-size:16px;
     }
-    div.trial {
+    .trial {
       margin-bottom:15px;
       padding-left:10px;
     }
-    .fastest, .slowest {
+    .fastest-trial, .slowest-trial {
       img {
         width:80px;
         margin-left:-25px;
@@ -343,6 +357,9 @@ div#results {
         }
       }
     }
+  }
+  .fastest {
+    margin-right:100px;
   }
   p.filters {
     margin-bottom:0;
