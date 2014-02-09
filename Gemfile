@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
-#ruby-gemset=railstutorial_rails_4_0
 
-gem 'rails', '4.0.2'
+gem 'rails', '~> 4.0.2'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'browser'
 gem 'friendly_id', '~> 5.0.0'

@@ -43,6 +43,8 @@ class SessionsController < ApplicationController
 
 	def show
 		@session = Session.friendly.find(params[:id])
+		@fastest = @session.trials.order("task_time ASC").limit(5)
+		@slowest = @session.trials.order("task_time DESC").limit(5)
 		@total_sessions = Session.count
 	end
 

@@ -47,8 +47,15 @@ input {
 
 /* Helper Classes */
 
+.show {
+  display: block !important;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
 .grey-bg {
-  background:#ddd;
+  background:#eee;
 }
 
 .scrim {
@@ -293,65 +300,120 @@ div#results {
     color:#fff;
   }
   h2 {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
   h3 {
-    font-size: 22.5px;
-    margin-bottom: 20px;
+    font-size: 24px;
+    margin-bottom: 21px;
   }
   p.results-text {
-    font-size:17.5px;
+    font-size:28px;
+    line-height: 40px;
+    margin-bottom:30px;
   }
   div.superlative-trial {
-    width: 368px;
+    width: 360px;
     float: left;
     margin-bottom: 70px;
     margin-top: 50px;
     img {
       width: 35px;
+      margin-right:10px;
     }
     p {
-      display:inline;
+      display:inline-block;
+      font-size:16px;
     }
-  }
-  div.trials-list {
-    clear:left;
-    img {
-      width:30px;
-      display:block;
-      margin:auto;
+    div.trial {
+      margin-bottom:15px;
+      padding-left:10px;
     }
-    div.warmup-trials {
-      background:#eee;
-      width:718px;
-      padding:5px 10px;
-      border: 1px dashed;
-      p.warmup-notice {
-        font-size: 10px;
-        line-height: 12px;
-        margin:6px 0 8px 0;
+    .fastest, .slowest {
+      img {
+        width:80px;
+        margin-left:-25px;
+        padding-left:0;
       }
-    }
-    div.recorded-trials {
-      margin-top:20px;
-      padding-top:10px;
-      > h4 {
-        padding-left:10px;
-      }
-      div.trial-row {
-        width:720px;
-        padding:0 10px;
-        margin:15px 0;
-        float: left;
+      p {
+        font-size:21px;
+        vertical-align:bottom;
+        span.superlative {
+          font-size:12px;
+          padding-left:3px;
+        }
       }
     }
   }
-  div.trial {
-    width: 175px;
-    display:inline-block;
-    h4 {
-      color:#777;
+  p.filters {
+    margin-bottom:0;
+    line-height:56px;
+    select {
+      width:auto;
+      margin:0 5px;
     }
+  }
+  div.filter-select {
+    margin:30px 0;
+  }
+  div.group1 {
+    margin:30px 0 0 0;
+    overflow:hidden;
+    background:#eee;
+    padding:20px 20px 10px 20px;
+    p.for {
+      width:40px;
+      float:left;
+    }
+    div {
+      float:left;
+    }
+    input[type="radio"], label {
+      float:left;
+      margin-bottom:20px;
+    }
+    input{
+      clear:left;
+      margin-right:5px;
+    }
+    .elipses {
+      float:left;
+    }
+    div.group1-filter {
+      position:relative;
+      top:21px;
+      width:567px;
+      margin-bottom:23px;
+    }
+  }
+  div.group-label {
+    padding-left:20px;
+    span {
+      font-size:10px;
+      color:#666;
+      font-weight:bold;
+    }
+  }
+  div.group1-label {
+    background-color: rgb(198,227,255);
+    margin-top:-10px;
+  }
+  div.group2-label {
+    background-color: rgb(255,233,171);
+  }
+  div.compared-to {
+    margin:30px 0;
+    p {
+      cursor:pointer;
+    }
+    .caret {
+      vertical-align:middle;
+    }
+  }
+  div.group2-filter {
+    margin:30px 0 0 0;
+    overflow:auto;
+    background:#eee;
+    padding:20px 20px 0 77px;
   }
 }
 
@@ -387,4 +449,3 @@ div#small-screen-scrim {
     display:none;
   }
 }
-

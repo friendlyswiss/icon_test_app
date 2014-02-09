@@ -3,72 +3,227 @@
 <div id="results">
 	
 	<h2>Results</h2>
-
-	<h3>Your Results</h3>
 	
 	<% #Number Correct %>
-	<p class="results-text">You selected <strong><%= "#{@session.trials.where(task_success: true).count}"%> out of 24</strong> icons correctly with an average speed of <strong><%= "#{(@session.trials.average("task_time") / 1000).round(3)}" %> seconds</strong>.</p>
+	<p class="results-text">You selected <strong><%= "#{@session.trials.where(task_success: true).count}"%> out of 24</strong> icons correctly<br />with an average speed of <strong><%= "#{(@session.trials.average("task_time") / 1000).round(3)}" %> seconds</strong>.</p>
 	
 	<% #Percentile Score %>
+	<p class="results-text">You were faster than <strong>90%</strong> of all other participants.</p>
 
-	<% #Fastest Trial %>
-	<% fastest = @session.trials.order("task_time ASC").first %>
-	<div class="superlative-trial fastest">
-		<h4>Fastest Trial</h4>
-		<%= image_tag("form#{fastest.target_form}-#{fastest.style}-#{fastest.color}.png") %>
-		<p>Trial <%= "#{fastest.sequence_order}" %>
-			<span class="spacer">___</span> 
-			<strong><%= "#{fastest.task_time.to_f / 1000}"%></strong> seconds
-		</p>
-	</div>
-	
-	<% #Slowest Trial %>
-	<% slowest = @session.trials.order("task_time DESC").first %>
-	<div class="superlative-trial slowest">
-		<h4>Slowest Trial</h4>
-		<%= image_tag("form#{slowest.target_form}-#{slowest.style}-#{slowest.color}.png") %>
-		<p>Trial <%= "#{slowest.sequence_order}" %>
-			<span class="spacer">___</span> 
-			<strong><%= "#{slowest.task_time.to_f / 1000}"%></strong> seconds
-		</p>
-	</div>
-	
-	<% #Trial Times List %>
-	<div class="trials-list">
-		
-		<div class="warmup-trials">
-			<h4>Warm-up Trials</h4>
-			<p class="warmup-notice"><i>The first four trials were warm-up trials. These will not be factored into the study data.</i></p>
+	<% #Fastest Trials %>
+	<div class="superlative-trial">
+		<h3>Fastest Trials</h3>
+		<div class="fastest trial">
+			<%= image_tag("form#{@fastest[0].target_form}-#{@fastest[0].style}-#{@fastest[0].color}.png") %>
+			<p><strong><%= "#{@fastest[0].task_time.to_f / 1000}"%></strong> seconds
+			<br />
+			<span class="superlative">FASTEST</span></p>
+		</div>
 		<% i = 1 %>
 		<% 4.times do %>
-			<div class="trial">
-				<h4 class="text-center">Trial <%= "#{i}"%></h4>
-				<%= image_tag("form#{@session.trials.find_by(sequence_order: i).target_form}-#{@session.trials.find_by(sequence_order: i).style}-#{@session.trials.find_by(sequence_order: i).color}.png") %>
-				<p class="text-center"><i><strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> seconds</i></p>
-			</div>
-			<% i += 1 %>
+		<div class="trial">
+			<%= image_tag("form#{@fastest[i].target_form}-#{@fastest[i].style}-#{@fastest[i].color}.png") %>
+			<p><strong><%= "#{@fastest[i].task_time.to_f / 1000}"%></strong> sec
+			</p>
+		</div>
+		<% i += 1 %>
 		<% end %>
+	</div>
+	
+	<% #Slowest Trials %>
+	<div class="superlative-trial">
+		<h3>Slowest Trials</h3>
+		<div class="fastest trial">
+			<%= image_tag("form#{@slowest[0].target_form}-#{@slowest[0].style}-#{@slowest[0].color}.png") %>
+			<p><strong><%= "#{@slowest[0].task_time.to_f / 1000}"%></strong> seconds
+			<br />
+			<span class="superlative">SLOWEST</span></p>
+			</p>
+		</div>
+		<% i = 1 %>
+		<% 4.times do %>
+		<div class="trial">
+			<%= image_tag("form#{@slowest[i].target_form}-#{@slowest[i].style}-#{@slowest[i].color}.png") %>
+			<p><strong><%= "#{@slowest[i].task_time.to_f / 1000}"%></strong> sec
+			</p>
+		</div>
+		<% i += 1 %>
+		<% end %>
+	</div>
+
+	<% #Filter Results %>
+	<div class="filter-results">
+		<h3>Filter Results</h3>
+		
+		<div class="filter-select">
+			<p class="filters">
+
+				Show average 
+				
+				<%= select_tag :speed_accuracy, options_for_select([
+					['speed', 'speed'],
+					['accuracy', 'accuracy']]),:class => 'multiselect' %>
+				
+				for icons with 
+				
+				<%= select_tag :style, options_for_select([
+					['either', 'either'],
+					['solid', 'solid'],
+					['hollow', 'hollow']]),:class => 'multiselect' %>
+				
+				style and 
+				
+				 <%= select_tag :color, options_for_select([
+				 	['either', 'either'],
+				 	['black on white', 'white_bg'],
+				 	['white on black', 'black_bg']]),:class => 'multiselect' %>
+				 
+				color
+			</p>
 		</div>
 		
-		<div class="recorded-trials">
-			<h4>Recorded Trials</h4>
-		<% i = 5 %>
-		<% 20.times do %>
-			<% if ((i - 1) % 4) == 0 %>
-				<div class="trial-row">
-			<% end %>
-					<div class="trial">
-						<h4 class="text-center">Trial <%= "#{i}"%></h4>
-						<%= image_tag("form#{@session.trials.find_by(sequence_order: i).target_form}-#{@session.trials.find_by(sequence_order: i).style}-#{@session.trials.find_by(sequence_order: i).color}.png") %>
-						<p class="text-center"><strong><%= "#{@session.trials.find_by(sequence_order: i).task_time.to_f / 1000}" %></strong> seconds
-						</p>
-					</div>
-			<% if (i % 4) == 0 %>
-				</div>
-			<% end %>
-			<% i += 1 %>
-		<% end %>
+		<div class="group1">
+			<p class="for">For</p>
+			<div>
+				<%= radio_button_tag :group1, 'me', true, class: 'group1-input me'  %>
+				<%= label_tag :group1_me, 'Me'  %>
+				<%= radio_button_tag :group1, 'all-people', false, class: 'group1-input all-people'  %>
+				<%= label_tag 'group1_all-people', 'All people', class: 'all-people-label'  %>
+					<span class="elipses">...</span>
+			</div>
+			<div class="group1-filter hidden">
+				
+				<p class="filters">
+
+					<%= select_tag :group1_age, options_for_select([
+						['of all ages', 'all'],
+						['between 18-25', '18-25'],
+						['between 26-40', '26-40'],
+						['between 41-60', '41-60'],
+						['older than 60', '60_older']
+					]),:class => 'multiselect' %>
+					
+					who took this test using
+					
+					<%= select_tag :group1_test_browser, options_for_select([
+						['any browser', 'any'],
+						["Chrome","chrome"],
+						["Safari","safari"],
+						["Firefox","firefox"],
+						["IE","ie"],
+						["Opera","opera"],
+						["other browser","other"]
+					]),:class => 'multiselect' %>
+
+					from
+					
+					<%= select_tag :group1_test_os, options_for_select([
+						['any computer', 'any'],
+						["Windows computer","ios"],
+						["Mac computer","android"],
+						["Linux computer","linux"],
+						["other computer","other"]
+					]),:class => 'multiselect' %>
+
+					who are most comfortable using 
+					
+					<%= select_tag :group1_primary_os, options_for_select([
+						['any desktop OS', 'any'],
+						["Windows","windows"],
+						["Mac","mac"],
+						["Linux","linux"],
+						["other desktop OS","other"]
+					]),:class => 'multiselect' %>
+
+					and
+					
+					<%= select_tag :group1_primary_mobile, options_for_select([
+						['any mobile OS', 'any'],
+						["iPhone/iOS","ios"],
+						["Android","android"],
+						["Windows Mobile","windows-mobile"],
+						["BlackBerry","blackberry"],
+						["other mobile OS","other"]
+					]),:class => 'multiselect' %>
+					
+			 	</p>
+			</div>
+		</div>
+		
+		<div class="group1-label group-label hidden">
+				<span>GROUP 1</span>
 		</div>
 
-	</div><!-- .trials-list end -->
-</div><!-- #results end -->
+		
+		<div class="compared-to">
+			<p>Compared to <span class="caret"></span></p>
+		</div>
+		
+		<div class="group2-filter hidden">
+			<p class="filters">
+
+					All people
+
+					<%= select_tag :group2_age, options_for_select([
+						['of all ages', 'all'],
+						['between 18-25', '18-25'],
+						['between 26-40', '26-40'],
+						['between 41-60', '41-60'],
+						['older than 60', '60_older']
+					]),:class => 'multiselect' %>
+					
+					who took this test using
+					
+					<%= select_tag :group2_test_browser, options_for_select([
+						['any browser', 'any'],
+						["Chrome","chrome"],
+						["Safari","safari"],
+						["Firefox","firefox"],
+						["IE","ie"],
+						["Opera","opera"],
+						["other browser","other"]
+					]),:class => 'multiselect' %>
+
+					from
+					
+					<%= select_tag :group2_test_os, options_for_select([
+						['any computer', 'any'],
+						["Windows computer","ios"],
+						["Mac computer","android"],
+						["Linux computer","linux"],
+						["other computer","other"]
+					]),:class => 'multiselect' %>
+
+					who are most comfortable using 
+					
+					<%= select_tag :group2_primary_os, options_for_select([
+						['any desktop OS', 'any'],
+						["Windows","windows"],
+						["Mac","mac"],
+						["Linux","linux"],
+						["other desktop OS","other"]
+					]),:class => 'multiselect' %>
+
+					and
+					
+					<%= select_tag :group2_primary_mobile, options_for_select([
+						['any mobile OS', 'any'],
+						["iPhone/iOS","ios"],
+						["Android","android"],
+						["Windows Mobile","windows-mobile"],
+						["BlackBerry","blackberry"],
+						["other mobile OS","other"]
+					]),:class => 'multiselect' %>
+					
+			 	</p>
+		</div>
+
+		<div class="group2-label group-label hidden">
+			<span>GROUP 2</span>
+		</div>
+		
+		<div class="chart-container">
+		</div>
+
+	</div>
+</div>
