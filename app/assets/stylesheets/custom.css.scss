@@ -89,7 +89,7 @@ div.homepage {
   .info-sheet {
     overflow:scroll;
     resize:vertical;
-    margin-bottom:10px;
+    margin:20px 0 25px 0;
     padding:10px;
     border: 1px solid #ddd;
     height:100px;
@@ -97,6 +97,9 @@ div.homepage {
     li {
       font-size:12px;
     }
+  }
+  form {
+    margin-top:25px;
   }
   input[type="submit"] {
     display:block;
@@ -307,7 +310,7 @@ div#questionnaire {
 /* Results */
 
 div#results {
-  padding:10px;
+  padding:10px 10px 80px 10px;
   width:740px;
   margin:20px auto;
   .spacer {
@@ -370,12 +373,15 @@ div#results {
     }
   }
   div.filter-select {
-    margin:30px 0;
+    margin:20px 0;
+  }
+  div#chart-container{
+    width:720px;
+    height:400px;
+    margin-top:20px;
   }
   div.group1 {
-    margin:30px 0 0 0;
     overflow:hidden;
-    background:#eee;
     padding:20px 20px 10px 20px;
     p.for {
       width:40px;
@@ -400,37 +406,44 @@ div#results {
       top:21px;
       width:567px;
       margin-bottom:23px;
+      & > .filters {
+        padding-bottom:10px;
+      }
     }
   }
   div.group-label {
     padding-left:20px;
     span {
       font-size:10px;
-      color:#666;
+      color:#eee;
       font-weight:bold;
     }
   }
   div.group1-label {
-    background-color: rgb(198,227,255);
-    margin-top:-10px;
+    background-color: #00bcdf;
+    margin-top:-21px;
   }
   div.group2-label {
-    background-color: rgb(255,233,171);
+    background-color: #ed145b;
   }
   div.compared-to {
-    margin:30px 0;
+    margin:10px 0 0 0;
+    padding:10px 20px 10px 20px;
     p {
+      display:inline-block;
       cursor:pointer;
+      margin-bottom:0;
+      text-decoration:underline;
     }
     .caret {
       vertical-align:middle;
+      margin-left:5px;
     }
   }
   div.group2-filter {
-    margin:30px 0 0 0;
+    margin:0 0 0 0;
     overflow:auto;
-    background:#eee;
-    padding:20px 20px 0 77px;
+    padding:0 20px 0 77px;
   }
 }
 

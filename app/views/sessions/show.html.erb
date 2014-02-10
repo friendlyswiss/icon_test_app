@@ -82,7 +82,9 @@
 			</p>
 		</div>
 		
-		<div class="group1">
+		<div id="chart-container"></div>
+
+		<div class="group1 grey-bg">
 			<p class="for">For</p>
 			<div>
 				<%= radio_button_tag :group1, 'me', true, class: 'group1-input me'  %>
@@ -156,10 +158,10 @@
 
 		
 		<div class="compared-to">
-			<p>Compared to <span class="caret"></span></p>
+			<p>Compared to<span class="caret"></span></p>
 		</div>
 		
-		<div class="group2-filter hidden">
+		<div class="group2-filter grey-bg hidden">
 			<p class="filters">
 
 					All people
@@ -220,9 +222,6 @@
 
 		<div class="group2-label group-label hidden">
 			<span>GROUP 2</span>
-		</div>
-		
-		<div class="chart-container">
 		</div>
 
 	</div>
