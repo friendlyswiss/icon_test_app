@@ -62,21 +62,21 @@
 				
 				<%= select_tag :speed_accuracy, options_for_select([
 					['speed', 'speed'],
-					['accuracy', 'accuracy']]),:class => 'multiselect' %>
+					['accuracy', 'accuracy']], 'speed'),:class => 'speed_accuracy-select' %>
 				
 				for icons with 
 				
 				<%= select_tag :style, options_for_select([
 					['either', 'either'],
 					['solid', 'solid'],
-					['hollow', 'hollow']]),:class => 'multiselect' %>
+					['hollow', 'hollow']], 'either'),:class => 'style-multiselect', :multiple => "multiple" %>
 				
 				style and 
 				
 				 <%= select_tag :color, options_for_select([
 				 	['either', 'either'],
 				 	['black on white', 'white_bg'],
-				 	['white on black', 'black_bg']]),:class => 'multiselect' %>
+				 	['white on black', 'black_bg']], 'either'),:class => 'color-multiselect', :multiple => "multiple" %>
 				 
 				color
 			</p>
@@ -148,8 +148,7 @@
 					
 			 	</p>
 			</div>
-		</div>
-		
+		</div>	
 		<div class="group1-label group-label hidden">
 				<span>GROUP 1</span>
 		</div>
@@ -217,7 +216,6 @@
 					
 			 	</p>
 		</div>
-
 		<div class="group2-label group-label hidden">
 			<span>GROUP 2</span>
 		</div>
@@ -226,81 +224,3 @@
 
 	</div>
 </div>
-
-<script type='text/javascript'>
-	$(document).ready(function() {
-
-	  console.log("results.js working");
-	  console.log("the average time for solid trials is " + "<%= (@session.trials.where(style:'solid').average('task_time').to_f / 1000).round(3) %>");
-
-		var cats = ["Solid Black","Hollow Black","Solid White","Hollow White"];
-		var group1_series = {name: 'Group 1', data: [<%= (@session.trials.where(style:'solid').average('task_time').to_f / 1000).round(3) %>, 0, 4, 5]};
-		var group2_series = {name: 'Group 2', data: [5, 7, 3, 5]};
-		
-		if ($('.group2-filter').hasClass('hidden')) {
-			var series_visible = [group1_series];
-		} else {
-			var series_visible = [group1_series, group2_series];
-		};	
-
-		var chart = new Highcharts.Chart({
-			chart: {
-				type: 'column',
-				renderTo: 'chart-container'
-			},
-			title: {
-				text: 'Speed'
-			},
-			xAxis: {
-				categories: cats,
-				title: {
-					text: "Style/Color Combinations"
-				}
-			},
-			yAxis: {
-				type: "linear",
-				title: {
-					text: "Time"
-				}
-			},
-			series: series_visible,
-			colors: [
-			   '#00bcdf',
-			   '#ed145b'
-			],
-			credits: {
-				enabled: false
-			}
-		});
-
-		//Expand and Contract Group 1 Filters
-		$('.group1-input').click(function() {
-			console.log("clicked");
-			if ($('.all-people').is(':checked')){
-	      $('.group1-filter').removeClass('hidden');
-	      $('span.elipses').addClass('hidden');
-	    }
-	    else {
-				$('.group1-filter').addClass('hidden');
-				$('span.elipses').removeClass('hidden');
-	    }
-	  });
-
-		//Expand and Contract Group 2 Filters
-		$('.compared-to').mouseup(function() {
-	  	if ($('.group2-filter').hasClass('hidden')) {
-	  		$('.group1-label').removeClass('hidden');
-	  		$('.group2-filter').removeClass('hidden');
-	  		$('.group2-label').removeClass('hidden');
-	  		$('.compared-to').addClass('grey-bg');
-				chart.addSeries(group2_series);
-			} else {
-				$('.group2-filter').addClass('hidden');
-				$('.group1-label').addClass('hidden');
-				$('.group2-label').addClass('hidden');
-				$('.compared-to').removeClass('grey-bg');
-				chart.series[1].remove();
-			}
-		});
-	});
-</script>

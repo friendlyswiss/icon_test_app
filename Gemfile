@@ -6,6 +6,7 @@ gem 'bootstrap-sass', '2.3.2.0'
 gem 'browser'
 gem 'friendly_id', '~> 5.0.0'
 gem "highcharts-rails", "~> 3.0.0"
+gem 'bootstrap-multiselect-rails', :git => 'https://github.com/benjamincanac/bootstrap-multiselect-rails.git'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

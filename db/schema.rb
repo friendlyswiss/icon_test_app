@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129142356) do
+ActiveRecord::Schema.define(version: 20140211052504) do
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140129142356) do
     t.float    "success_rate"
     t.string   "primary_mobile"
     t.string   "random_id"
-    t.string   "years_exp"
+    t.float    "success_rate_normalized"
   end
 
   create_table "trials", force: true do |t|

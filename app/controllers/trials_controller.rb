@@ -38,7 +38,8 @@ class TrialsController < ApplicationController
 			redirect_to trial_path(next_trial)
 		else
 			session = Session.find(@trial.session_id)
-      session.update_attributes(success_rate: (session.trials.where(:task_success => true, :sequence_order => 5..24).count.to_f / 20))
+      session.update_attributes(success_rate: (session.trials.where(:task_success => true).count.to_f / 24), success_rate_normalized: (session.trials.where(:task_success => true, :sequence_order => 5..24).count.to_f / 20))
+
 			redirect_to questionnaire_path(session)
 		end
 	end

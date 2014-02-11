@@ -1,9 +1,9 @@
 IconTestApp::Application.routes.draw do
   root 'sessions#new'
-  get ':id/questionnaire' => 'sessions#edit', as: :questionnaire
-  get ':id' => 'sessions#show', as: :results
   resources :sessions
   resources :trials
+  get ':id/questionnaire' => 'sessions#edit', as: :questionnaire
+  get ':id' => 'sessions#show', as: :results
 
 
   # The priority is based upon order of creation: first created -> highest priority.

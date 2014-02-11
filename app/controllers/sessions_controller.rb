@@ -1,4 +1,13 @@
 class SessionsController < ApplicationController
+	respond_to :html, :json
+
+	def index
+		@cleaned_sessions = Session.all #plus some cleaning
+
+		respond_to do |format|
+			format.json { render :json => @cleaned_sessions }
+		end
+	end
 
 	def new
 		@session = Session.new
@@ -43,9 +52,29 @@ class SessionsController < ApplicationController
 
 	def show
 		@session = Session.friendly.find(params[:id])
+		
 		@fastest = @session.trials.order("task_time ASC").limit(5)
 		@slowest = @session.trials.order("task_time DESC").limit(5)
-		@total_sessions = Session.count
+		
+		@all_time = avg_time('either', 'either')
+		@solid_time = avg_time('solid', 'either')
+		@hollow_time = avg_time('hollow','either')
+		@black_time = avg_time('either', 'white_bg')
+		@white_time = avg_time('either', 'black_bg')
+		@solid_black_time = avg_time('solid', 'white_bg')
+		@hollow_black_time = avg_time('hollow', 'white_bg')
+		@solid_white_time = avg_time('solid', 'black_bg')
+		@hollow_white_time = avg_time('hollow', 'black_bg')
+
+		@all_acc = accuracy('either', 'either')
+		@solid_acc = accuracy('solid', 'either')
+		@hollow_acc = accuracy('hollow','either')
+		@black_acc = accuracy('either', 'white_bg')
+		@white_acc = accuracy('either', 'black_bg')
+		@solid_black_acc = accuracy('solid', 'white_bg')
+		@hollow_black_acc = accuracy('hollow', 'white_bg')
+		@solid_white_acc = accuracy('solid', 'black_bg')
+		@hollow_white_acc = accuracy('hollow', 'black_bg')
 	end
 
 	def edit
@@ -60,11 +89,31 @@ class SessionsController < ApplicationController
 
 	private
 
-	def completed?
-		
+	def session_params
+    params.require(:session).permit(:test_browser, :test_os, :primary_os, :primary_mobile, :age, :years_exp, :success_rate, :success_rate_normalized)
+  end
+
+	def avg_time (style, color)
+		if style == 'either' && color == 'either'
+			(@session.trials.average('task_time').to_f / 1000).round(3)
+		elsif style == 'either'
+			(@session.trials.where(color: color).average('task_time').to_f / 1000).round(3)
+		elsif color == 'either'
+			(@session.trials.where(style: style).average('task_time').to_f / 1000).round(3)
+		else
+			(@session.trials.where("style = ? AND color = ?", style, color).average('task_time').to_f / 1000).round(3)
+		end
 	end
 
-	def session_params
-    params.require(:session).permit(:test_browser, :test_os, :primary_os, :primary_mobile, :age, :years_exp, :success_rate)
-  end
+	def accuracy (style, color)
+		if style == 'either' && color == 'either'
+			(@session.trials.where(task_success: true).count.to_f / 0.24).round(1)
+		elsif style == 'either'
+			(@session.trials.where("color = ? AND task_success = ?", color, true).count.to_f / 0.12).round(1)
+		elsif color == 'either'
+			(@session.trials.where("style = ? AND task_success = ?", style, true).count.to_f / 0.12).round(1)
+		else
+			(@session.trials.where("style = ? AND color = ? AND task_success = ?", style, color, true).count.to_f / 0.06).round(1)
+		end
+	end
 end
