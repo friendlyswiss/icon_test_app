@@ -2,10 +2,51 @@ class SessionsController < ApplicationController
 	respond_to :html, :json
 
 	def index
-		@cleaned_sessions = Session.all #plus some cleaning
+		cleaned_sessions = Session.all #plus some cleaning
 
+		@chart_options = {
+			chart: {
+					type: 'column',
+					renderTo: 'chart-container',
+					style: {
+						fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
+					}
+				},
+				title: {
+					text: 'Speed'
+				},
+				xAxis: {
+					categories: ["Solid Black","Hollow Black","Solid White","Hollow White"],
+					title: {
+						text: "Style/Color Combinations"
+					}
+				},
+				yAxis: {
+					type: "linear",
+					title: {
+						text: "Time"
+					}
+				},
+
+				series: [{
+					name: 'Group 1',
+					data: [5, 8, 8, 2]
+				}, {
+					name: 'Group 2',
+					data: [5, 7, 3, 5]
+				}],
+
+				colors: [
+				   '#00bcdf',
+				   '#ed145b'
+				],
+				credits: {
+					enabled: false
+				}
+			}
+		
 		respond_to do |format|
-			format.json { render :json => @cleaned_sessions }
+			format.json { render :json => @chart_options }
 		end
 	end
 
