@@ -63,21 +63,21 @@
 				
 				<%= select_tag :speed_accuracy, options_for_select([
 					['speed', 'speed'],
-					['accuracy', 'accuracy']], 'speed'),:class => 'speed_accuracy-select' %>
+					['accuracy', 'accuracy']], 'speed'),:class => 'speed_accuracy_select' %>
 				
 				for icons with 
 				
 				<%= select_tag :style, options_for_select([
 					['both', 'both'],
 					['either', 'either']
-					], 'both'),:class => 'style-multiselect' %>
+					], 'both'),:class => 'style_select' %>
 				
 				style and 
 				
 				 <%= select_tag :color, options_for_select([
 				 	['both', 'both'],
 				 	['either', 'either']
-				 	], 'both'),:class => 'color-multiselect' %>
+				 	], 'both'),:class => 'color_select' %>
 				 
 				color
 			</p>

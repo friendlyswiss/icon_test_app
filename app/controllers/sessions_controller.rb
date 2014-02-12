@@ -62,9 +62,6 @@ class SessionsController < ApplicationController
 
 	
 	def index
-		respond_to do |format|
-			format.json { render :json => @chart_options }
-		end
 		
 		sid = params[:sid]
 		my_session = Session.find(sid)
@@ -74,10 +71,10 @@ class SessionsController < ApplicationController
 
 		#Pull from completed session or filter on all people
 		if params[:group1_is] == 'me'
-			group1_data = my_session.my_results(params[:speed_accuracy],params[:style],params[:color])
+			group1_data = my_session.my_results(params[:speed_accuracy_select],params[:style_select],params[:color_select])
 		elsif params[:group1_is] == 'all-people'
 			group1_data = [4,3,2,1]
-				#cleaned_sessions.my_results(params[:speed_accuracy],params[:style],params[:color])					
+				#cleaned_sessions.my_results(params[:speed_accuracy_select],params[:style_select],params[:color_select])					
 		end
 		
 		#Group 2 only gets filtered if it's showing
@@ -91,7 +88,7 @@ class SessionsController < ApplicationController
 		series2 = {name: 'Group 2', data: [1,2,3,4]} #group2_data}]
 
 		if params[:no_groups] == '1'
-			series = series1
+			series = [series1]
 		else
 			series = [series1, series2]
 		end
@@ -122,14 +119,7 @@ class SessionsController < ApplicationController
 					}
 				},
 
-				series: #series,
-				[{
-            name: 'Jane',
-            data: [1, 0, 4, 9]
-        }, {
-            name: 'John',
-            data: [5, 7, 3, 9]
-        }],
+				series: series,
 
 				colors: [
 				   '#00bcdf',
@@ -139,7 +129,9 @@ class SessionsController < ApplicationController
 					enabled: false
 				}
 			}
-		
+		respond_to do |format|
+			format.json { render :json => @chart_options }
+		end
 	end
 
 	

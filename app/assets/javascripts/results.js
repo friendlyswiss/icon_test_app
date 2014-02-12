@@ -12,15 +12,17 @@ $(document).ready(function() {
 				sid: $('#results').attr("class"),
 				no_groups: 1,
 				group1_is: 'me',
-				speed_accuracy_select: ($('.speed_accuracy-select').val()),
-				style_multiselect: ($('.style-multiselect').val()),
-				color_multiselect: ($('.color-multiselect').val())
+				speed_accuracy_select: ($('.speed_accuracy_select').val()),
+				style_select: ($('.style_select').val()),
+				color_select: ($('.color_select').val())
 			},
 			function(chart_options) {
 			$(function() {
 				$('#chart-container').highcharts(chart_options);
+				console.log(chart_options);
 				console.log(no_groups);
 				console.log(group1_is);
+
 			});
 		});
 
@@ -32,9 +34,9 @@ $(document).ready(function() {
 				{
 					no_groups: no_groups,
 					group1_is: group1_is,
-					speed_accuracy_select: ($('.speed_accuracy-select').val()),
-					style_multiselect: ($('.style-multiselect').val()),
-					color_multiselect: ($('.color-multiselect').val())
+					speed_accuracy_select: ($('.speed_accuracy_select').val()),
+					style_select: ($('.style_select').val()),
+					color_select: ($('.color_select').val())
 				},
 				function(chart_options) {
 				$('#chart-container').highcharts(chart_options);
@@ -53,9 +55,9 @@ $(document).ready(function() {
 					{
 						no_groups: no_groups,
 						group1_is: group1_is,
-						speed_accuracy_select: ($('.speed_accuracy-select').val()),
-						style_multiselect: ($('.style-multiselect').val()),
-						color_multiselect: ($('.color-multiselect').val())
+						speed_accuracy_select: ($('.speed_accuracy_select').val()),
+						style_select: ($('.style_select').val()),
+						color_select: ($('.color_select').val())
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
@@ -70,9 +72,9 @@ $(document).ready(function() {
 					{
 						no_groups: no_groups,
 						group1_is: group1_is,
-						speed_accuracy_select: ($('.speed_accuracy-select').val()),
-						style_multiselect: ($('.style-multiselect').val()),
-						color_multiselect: ($('.color-multiselect').val())
+						speed_accuracy_select: ($('.speed_accuracy_select').val()),
+						style_select: ($('.style_select').val()),
+						color_select: ($('.color_select').val())
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
@@ -92,9 +94,9 @@ $(document).ready(function() {
 					{
 						no_groups: 2,
 						group1_is: group1_is,
-						speed_accuracy_select: ($('.speed_accuracy-select').val()),
-						style_multiselect: ($('.style-multiselect').val()),
-						color_multiselect: ($('.color-multiselect').val())
+						speed_accuracy_select: ($('.speed_accuracy_select').val()),
+						style_select: ($('.style_select').val()),
+						color_select: ($('.color_select').val())
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
@@ -108,9 +110,9 @@ $(document).ready(function() {
 					{
 						no_groups: 1,
 						group1_is: group1_is,
-						speed_accuracy_select: ($('.speed_accuracy-select').val()),
-						style_multiselect: ($('.style-multiselect').val()),
-						color_multiselect: ($('.color-multiselect').val())
+						speed_accuracy_select: ($('.speed_accuracy_select').val()),
+						style_select: ($('.style_select').val()),
+						color_select: ($('.color_select').val())
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
