@@ -21,7 +21,7 @@ class Session < ActiveRecord::Base
 				]
 
 			elsif style == 'either' && color == 'either'
-				labels = "All"
+				labels = ["All"]
 				groupdata = [(self.trials.average('task_time').to_f / 1000).round(3)]
 			
 			elsif style == 'both' && color == 'either'
@@ -52,7 +52,7 @@ class Session < ActiveRecord::Base
 				]
 
 			elsif style == 'either' && color == 'either'
-				labels = "All"
+				labels = ["All"]
 				groupdata = [(self.trials.where(task_success: true).count.to_f / 0.24).round(1)]
 			
 			elsif style == 'both' && color == 'either'

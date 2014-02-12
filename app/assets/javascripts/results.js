@@ -27,6 +27,23 @@ $(document).ready(function() {
 			});
 		});
 
+		//Pluralize text for both and either
+		$('.style_select, .color_select').on('change', (function() {
+			
+			if ($('.style_select').val() == 'either') {
+				$('span.style-text').replaceWith('<span class="style-text">style</span>')
+			}	else if ($('.style_select').val() == 'both'){
+				$('span.style-text').replaceWith('<span class="style-text">styles</span>')
+			}
+
+			if ($('.color_select').val() == 'either') {
+
+				$('span.color-text').replaceWith('<span class="color-text">color</span>')
+			} else if ($('.style_select').val() == 'both'){
+				$('span.color-text').replaceWith('<span class="color-text">colors</span>')
+			}
+
+	  }));
 
 		//Redraw chart when dropdowns are clicked
 		$("select").on('change', (function(e) {
@@ -125,5 +142,8 @@ $(document).ready(function() {
 				});
 			}
 		});
+		
+		
+
 	}	
 });

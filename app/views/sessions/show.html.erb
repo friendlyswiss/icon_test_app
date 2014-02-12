@@ -5,10 +5,10 @@
 	<h2>Results</h2>
 	
 	<% #Number Correct %>
-	<p class="results-text">You selected <strong><%= "#{@session.trials.where(task_success: true).count}"%> out of 24</strong> icons correctly<br />with an average speed of <strong><%= "#{(@session.trials.average("task_time") / 1000).round(3)}" %> seconds</strong>.</p>
+	<p class="results-text">You selected <strong><%= "#{@session.trials.where(task_success: true).count}"%> out of 24</strong> icons correctly<br />with an average speed of <strong><%= "#{@avg_task_time.round(3)}" %> seconds</strong>.</p>
 	
 	<% #Percentile Score %>
-	<p class="results-text">You were faster than <strong>90%</strong> of all other participants.</p>
+	<p class="results-text">You were faster than <strong><%= "#{@speed_percentile}" %>%</strong> of all other people.</p>
 
 	<% #Fastest Trials %>
 	<div class="superlative-trial fastest">
@@ -68,18 +68,20 @@
 				for icons with 
 				
 				<%= select_tag :style, options_for_select([
-					['both', 'both'],
-					['either', 'either']
+					['both styles', 'both'],
+					['either style', 'either']
 					], 'both'),:class => 'style_select' %>
 				
-				style and 
+				<% #<span class="style-text">styles</span> %>
+
+				and 
 				
 				 <%= select_tag :color, options_for_select([
-				 	['both', 'both'],
-				 	['either', 'either']
+				 	['both colors', 'both'],
+				 	['either color', 'either']
 				 	], 'both'),:class => 'color_select' %>
 				 
-				color
+				<% #<span class="color-text">colors</span> %>
 			</p>
 		</div>
 
