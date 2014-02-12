@@ -1,6 +1,6 @@
 <% provide(:title, 'Results') %>
 
-<div id="results">
+<div id="results" class="<%= "#{@session.id}" %>">
 	
 	<h2>Results</h2>
 	
@@ -51,6 +51,7 @@
 		<% end %>
 	</div>
 
+
 	<% #Filter Results %>
 	<div class="filter-results">
 		<h3>Filter Results</h3>
@@ -67,16 +68,16 @@
 				for icons with 
 				
 				<%= select_tag :style, options_for_select([
-					['either', 'either'],
-					['solid', 'solid'],
-					['hollow', 'hollow']], 'either'),:class => 'style-multiselect', :multiple => "multiple" %>
+					['both', 'both'],
+					['either', 'either']
+					], 'both'),:class => 'style-multiselect' %>
 				
 				style and 
 				
 				 <%= select_tag :color, options_for_select([
-				 	['either', 'either'],
-				 	['black on white', 'white_bg'],
-				 	['white on black', 'black_bg']], 'either'),:class => 'color-multiselect', :multiple => "multiple" %>
+				 	['both', 'both'],
+				 	['either', 'either']
+				 	], 'both'),:class => 'color-multiselect' %>
 				 
 				color
 			</p>

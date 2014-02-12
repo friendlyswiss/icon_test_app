@@ -1,55 +1,6 @@
 class SessionsController < ApplicationController
 	respond_to :html, :json
 
-	def index
-		cleaned_sessions = Session.all #plus some cleaning
-
-		@chart_options = {
-			chart: {
-					type: 'column',
-					renderTo: 'chart-container',
-					style: {
-						fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
-					}
-				},
-				title: {
-					text: 'Speed'
-				},
-				xAxis: {
-					categories: ["Solid Black","Hollow Black","Solid White","Hollow White"],
-					title: {
-						text: "Style/Color Combinations"
-					}
-				},
-				yAxis: {
-					type: "linear",
-					title: {
-						text: "Time"
-					}
-				},
-
-				series: [{
-					name: 'Group 1',
-					data: [5, 8, 8, 2]
-				}, {
-					name: 'Group 2',
-					data: [5, 7, 3, 5]
-				}],
-
-				colors: [
-				   '#00bcdf',
-				   '#ed145b'
-				],
-				credits: {
-					enabled: false
-				}
-			}
-		
-		respond_to do |format|
-			format.json { render :json => @chart_options }
-		end
-	end
-
 	def new
 		@session = Session.new
 	end
@@ -96,26 +47,7 @@ class SessionsController < ApplicationController
 		
 		@fastest = @session.trials.order("task_time ASC").limit(5)
 		@slowest = @session.trials.order("task_time DESC").limit(5)
-		
-		@all_time = avg_time('either', 'either')
-		@solid_time = avg_time('solid', 'either')
-		@hollow_time = avg_time('hollow','either')
-		@black_time = avg_time('either', 'white_bg')
-		@white_time = avg_time('either', 'black_bg')
-		@solid_black_time = avg_time('solid', 'white_bg')
-		@hollow_black_time = avg_time('hollow', 'white_bg')
-		@solid_white_time = avg_time('solid', 'black_bg')
-		@hollow_white_time = avg_time('hollow', 'black_bg')
 
-		@all_acc = accuracy('either', 'either')
-		@solid_acc = accuracy('solid', 'either')
-		@hollow_acc = accuracy('hollow','either')
-		@black_acc = accuracy('either', 'white_bg')
-		@white_acc = accuracy('either', 'black_bg')
-		@solid_black_acc = accuracy('solid', 'white_bg')
-		@hollow_black_acc = accuracy('hollow', 'white_bg')
-		@solid_white_acc = accuracy('solid', 'black_bg')
-		@hollow_white_acc = accuracy('hollow', 'black_bg')
 	end
 
 	def edit
@@ -128,33 +60,93 @@ class SessionsController < ApplicationController
 		redirect_to results_path(@session)
 	end
 
+	
+	def index
+		respond_to do |format|
+			format.json { render :json => @chart_options }
+		end
+		
+		sid = params[:sid]
+		my_session = Session.find(sid)
+		cleaned_sessions = Session.all #plus some cleaning
+		categories = []
+		group2_data = nil
+
+		#Pull from completed session or filter on all people
+		if params[:group1_is] == 'me'
+			group1_data = my_session.my_results(params[:speed_accuracy],params[:style],params[:color])
+		elsif params[:group1_is] == 'all-people'
+			group1_data = [4,3,2,1]
+				#cleaned_sessions.my_results(params[:speed_accuracy],params[:style],params[:color])					
+		end
+		
+		#Group 2 only gets filtered if it's showing
+		if params[:no_groups] == 2
+			#group2_data = cleaned_sessions.my_results(params[:speed_accuracy],params[:style],params[:color])
+		end
+		
+
+
+		series1 = {name: 'Group 1', data: group1_data}
+		series2 = {name: 'Group 2', data: [1,2,3,4]} #group2_data}]
+
+		if params[:no_groups] == '1'
+			series = series1
+		else
+			series = [series1, series2]
+		end
+		
+		
+
+		@chart_options = {
+			chart: {
+					type: 'column',
+					renderTo: 'chart-container',
+					style: {
+						fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
+					}
+				},
+				title: {
+					text: 'title'
+				},
+				xAxis: {
+					categories: ["Solid Black","Hollow Black","Solid White","Hollow White"],
+					title: {
+						text: "Style/Color Combinations"
+					}
+				},
+				yAxis: {
+					type: "linear",
+					title: {
+						text: "Time"
+					}
+				},
+
+				series: #series,
+				[{
+            name: 'Jane',
+            data: [1, 0, 4, 9]
+        }, {
+            name: 'John',
+            data: [5, 7, 3, 9]
+        }],
+
+				colors: [
+				   '#00bcdf',
+				   '#ed145b'
+				],
+				credits: {
+					enabled: false
+				}
+			}
+		
+	end
+
+	
+
 	private
 
 	def session_params
     params.require(:session).permit(:test_browser, :test_os, :primary_os, :primary_mobile, :age, :years_exp, :success_rate, :success_rate_normalized)
   end
-
-	def avg_time (style, color)
-		if style == 'either' && color == 'either'
-			(@session.trials.average('task_time').to_f / 1000).round(3)
-		elsif style == 'either'
-			(@session.trials.where(color: color).average('task_time').to_f / 1000).round(3)
-		elsif color == 'either'
-			(@session.trials.where(style: style).average('task_time').to_f / 1000).round(3)
-		else
-			(@session.trials.where("style = ? AND color = ?", style, color).average('task_time').to_f / 1000).round(3)
-		end
-	end
-
-	def accuracy (style, color)
-		if style == 'either' && color == 'either'
-			(@session.trials.where(task_success: true).count.to_f / 0.24).round(1)
-		elsif style == 'either'
-			(@session.trials.where("color = ? AND task_success = ?", color, true).count.to_f / 0.12).round(1)
-		elsif color == 'either'
-			(@session.trials.where("style = ? AND task_success = ?", style, true).count.to_f / 0.12).round(1)
-		else
-			(@session.trials.where("style = ? AND color = ? AND task_success = ?", style, color, true).count.to_f / 0.06).round(1)
-		end
-	end
 end

@@ -9,6 +9,7 @@ $(document).ready(function() {
 		$.getJSON(
 			"/sessions",
 			{
+				sid: $('#results').attr("class"),
 				no_groups: 1,
 				group1_is: 'me',
 				speed_accuracy_select: ($('.speed_accuracy-select').val()),
@@ -18,6 +19,8 @@ $(document).ready(function() {
 			function(chart_options) {
 			$(function() {
 				$('#chart-container').highcharts(chart_options);
+				console.log(no_groups);
+				console.log(group1_is);
 			});
 		});
 
@@ -45,11 +48,35 @@ $(document).ready(function() {
 				group1_is = 'all_people';
 	      $('.group1-filter').removeClass('hidden');
 	      $('span.elipses').addClass('hidden');
+	      $.getJSON(
+					"/sessions",
+					{
+						no_groups: no_groups,
+						group1_is: group1_is,
+						speed_accuracy_select: ($('.speed_accuracy-select').val()),
+						style_multiselect: ($('.style-multiselect').val()),
+						color_multiselect: ($('.color-multiselect').val())
+					},
+					function(chart_options) {
+					$('#chart-container').highcharts(chart_options);
+				});
 	    }
 	    else {
 	    	group1_is = 'me';
 				$('.group1-filter').addClass('hidden');
 				$('span.elipses').removeClass('hidden');
+				$.getJSON(
+					"/sessions",
+					{
+						no_groups: no_groups,
+						group1_is: group1_is,
+						speed_accuracy_select: ($('.speed_accuracy-select').val()),
+						style_multiselect: ($('.style-multiselect').val()),
+						color_multiselect: ($('.color-multiselect').val())
+					},
+					function(chart_options) {
+					$('#chart-container').highcharts(chart_options);
+				});
 	    }
 	  });
 
