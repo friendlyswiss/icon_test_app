@@ -66,13 +66,16 @@ class SessionsController < ApplicationController
 		sid = params[:sid]
 		my_session = Session.find(sid)
 		cleaned_sessions = Session.all #plus some cleaning
-		categories = []
 		group2_data = nil
+		group1_name = 'Me'
 
 		#Pull from completed session or filter on all people
 		if params[:group1_is] == 'me'
+			group1_name = 'Me'
 			group1_data = my_session.my_results(params[:speed_accuracy_select],params[:style_select],params[:color_select])
-		elsif params[:group1_is] == 'all-people'
+
+		elsif params[:group1_is] == 'all_people'
+			group1_name = 'Group 1'
 			group1_data = [4,3,2,1]
 				#cleaned_sessions.my_results(params[:speed_accuracy_select],params[:style_select],params[:color_select])					
 		end
@@ -82,9 +85,10 @@ class SessionsController < ApplicationController
 			#group2_data = cleaned_sessions.my_results(params[:speed_accuracy],params[:style],params[:color])
 		end
 		
+		title = group1_data.pop
+		labels = group1_data.pop
 
-
-		series1 = {name: 'Group 1', data: group1_data}
+		series1 = {name: group1_name, data: group1_data}
 		series2 = {name: 'Group 2', data: [1,2,3,4]} #group2_data}]
 
 		if params[:no_groups] == '1'
@@ -104,12 +108,12 @@ class SessionsController < ApplicationController
 					}
 				},
 				title: {
-					text: 'title'
+					text: title
 				},
 				xAxis: {
-					categories: ["Solid Black","Hollow Black","Solid White","Hollow White"],
+					categories: labels,
 					title: {
-						text: "Style/Color Combinations"
+						text: "Icon Style/Color Combinations"
 					}
 				},
 				yAxis: {

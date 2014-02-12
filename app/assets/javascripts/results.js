@@ -4,12 +4,13 @@ $(document).ready(function() {
 		
 		var group1_is = 'me';
 		var no_groups = '1';
+		var sid = $('#results').attr("class");
 
 		//Get default data to create chart
 		$.getJSON(
 			"/sessions",
 			{
-				sid: $('#results').attr("class"),
+				sid: sid,
 				no_groups: 1,
 				group1_is: 'me',
 				speed_accuracy_select: ($('.speed_accuracy_select').val()),
@@ -32,6 +33,7 @@ $(document).ready(function() {
 			$.getJSON(
 				"/sessions",
 				{
+					sid: sid,
 					no_groups: no_groups,
 					group1_is: group1_is,
 					speed_accuracy_select: ($('.speed_accuracy_select').val()),
@@ -53,6 +55,7 @@ $(document).ready(function() {
 	      $.getJSON(
 					"/sessions",
 					{
+						sid: sid,
 						no_groups: no_groups,
 						group1_is: group1_is,
 						speed_accuracy_select: ($('.speed_accuracy_select').val()),
@@ -70,6 +73,7 @@ $(document).ready(function() {
 				$.getJSON(
 					"/sessions",
 					{
+						sid: sid,
 						no_groups: no_groups,
 						group1_is: group1_is,
 						speed_accuracy_select: ($('.speed_accuracy_select').val()),
@@ -92,6 +96,7 @@ $(document).ready(function() {
 				$.getJSON(
 					"/sessions",
 					{
+						sid: sid,
 						no_groups: 2,
 						group1_is: group1_is,
 						speed_accuracy_select: ($('.speed_accuracy_select').val()),
@@ -108,6 +113,7 @@ $(document).ready(function() {
 				$.getJSON(
 					"/sessions",
 					{
+						sid: sid,
 						no_groups: 1,
 						group1_is: group1_is,
 						speed_accuracy_select: ($('.speed_accuracy_select').val()),
