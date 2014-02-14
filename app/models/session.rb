@@ -73,4 +73,5 @@ class Session < ActiveRecord::Base
 		groupdata << labels << title
 		return groupdata
 	end
+
 end

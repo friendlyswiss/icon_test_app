@@ -13,17 +13,17 @@ $(document).ready(function() {
 				sid: sid,
 				no_groups: 1,
 				group1_is: 'me',
-				speed_accuracy_select: ($('.speed_accuracy_select').val()),
-				style_select: ($('.style_select').val()),
-				color_select: ($('.color_select').val())
+				speed_accuracy_select:
+					($('.speed_accuracy_select').val()),
+				style_select:
+					($('.style_select').val()),
+				color_select:
+					($('.color_select').val())
 			},
 			function(chart_options) {
 			$(function() {
 				$('#chart-container').highcharts(chart_options);
 				console.log(chart_options);
-				console.log(no_groups);
-				console.log(group1_is);
-
 			});
 		});
 
@@ -55,7 +55,27 @@ $(document).ready(function() {
 					group1_is: group1_is,
 					speed_accuracy_select: ($('.speed_accuracy_select').val()),
 					style_select: ($('.style_select').val()),
-					color_select: ($('.color_select').val())
+					color_select: ($('.color_select').val()),
+					group1_age_multiselect:
+						($('.group1-age-multiselect').val()),
+					group1_test_browser_multiselect:
+						($('.group1-test-browser-multiselect').val()),
+					group1_test_os_multiselect:
+						($('.group1-test-os-multiselect').val()),
+					group1_primary_os_multiselect:
+						($('.group1-primary-os-multiselect').val()),
+					group1_primary_mobile_multiselect:
+						($('.group1-primary-mobile-multiselect').val()),
+					group2_age_multiselect:
+						($('.group2-age-multiselect').val()),
+					group2_test_browser_multiselect:
+						($('.group2-test-browser-multiselect').val()),
+					group2_test_os_multiselect:
+						($('.group2-test-os-multiselect').val()),
+					group2_primary_os_multiselect:
+						($('.group2-primary-os-multiselect').val()),
+					group2_primary_mobile_multiselect:
+						($('.group2-primary-mobile-multiselect').val())
 				},
 				function(chart_options) {
 				$('#chart-container').highcharts(chart_options);
@@ -77,7 +97,27 @@ $(document).ready(function() {
 						group1_is: group1_is,
 						speed_accuracy_select: ($('.speed_accuracy_select').val()),
 						style_select: ($('.style_select').val()),
-						color_select: ($('.color_select').val())
+						color_select: ($('.color_select').val()),
+						group1_age_multiselect:
+							($('.group1-age-multiselect').val()),
+						group1_test_browser_multiselect:
+							($('.group1-test-browser-multiselect').val()),
+						group1_test_os_multiselect:
+							($('.group1-test-os-multiselect').val()),
+						group1_primary_os_multiselect:
+							($('.group1-primary-os-multiselect').val()),
+						group1_primary_mobile_multiselect:
+							($('.group1-primary-mobile-multiselect').val()),
+						group2_age_multiselect:
+							($('.group2-age-multiselect').val()),
+						group2_test_browser_multiselect:
+							($('.group2-test-browser-multiselect').val()),
+						group2_test_os_multiselect:
+							($('.group2-test-os-multiselect').val()),
+						group2_primary_os_multiselect:
+							($('.group2-primary-os-multiselect').val()),
+						group2_primary_mobile_multiselect:
+							($('.group2-primary-mobile-multiselect').val())
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
@@ -95,7 +135,27 @@ $(document).ready(function() {
 						group1_is: group1_is,
 						speed_accuracy_select: ($('.speed_accuracy_select').val()),
 						style_select: ($('.style_select').val()),
-						color_select: ($('.color_select').val())
+						color_select: ($('.color_select').val()),
+						group1_age_multiselect:
+							($('.group1-age-multiselect').val()),
+						group1_test_browser_multiselect:
+							($('.group1-test-browser-multiselect').val()),
+						group1_test_os_multiselect:
+							($('.group1-test-os-multiselect').val()),
+						group1_primary_os_multiselect:
+							($('.group1-primary-os-multiselect').val()),
+						group1_primary_mobile_multiselect:
+							($('.group1-primary-mobile-multiselect').val()),
+						group2_age_multiselect:
+							($('.group2-age-multiselect').val()),
+						group2_test_browser_multiselect:
+							($('.group2-test-browser-multiselect').val()),
+						group2_test_os_multiselect:
+							($('.group2-test-os-multiselect').val()),
+						group2_primary_os_multiselect:
+							($('.group2-primary-os-multiselect').val()),
+						group2_primary_mobile_multiselect:
+							($('.group2-primary-mobile-multiselect').val())
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
@@ -118,7 +178,27 @@ $(document).ready(function() {
 						group1_is: group1_is,
 						speed_accuracy_select: ($('.speed_accuracy_select').val()),
 						style_select: ($('.style_select').val()),
-						color_select: ($('.color_select').val())
+						color_select: ($('.color_select').val()),
+						group1_age_multiselect:
+							($('.group1-age-multiselect').val()),
+						group1_test_browser_multiselect:
+							($('.group1-test-browser-multiselect').val()),
+						group1_test_os_multiselect:
+							($('.group1-test-os-multiselect').val()),
+						group1_primary_os_multiselect:
+							($('.group1-primary-os-multiselect').val()),
+						group1_primary_mobile_multiselect:
+							($('.group1-primary-mobile-multiselect').val()),
+						group2_age_multiselect:
+							($('.group2-age-multiselect').val()),
+						group2_test_browser_multiselect:
+							($('.group2-test-browser-multiselect').val()),
+						group2_test_os_multiselect:
+							($('.group2-test-os-multiselect').val()),
+						group2_primary_os_multiselect:
+							($('.group2-primary-os-multiselect').val()),
+						group2_primary_mobile_multiselect:
+							($('.group2-primary-mobile-multiselect').val())
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
@@ -135,7 +215,27 @@ $(document).ready(function() {
 						group1_is: group1_is,
 						speed_accuracy_select: ($('.speed_accuracy_select').val()),
 						style_select: ($('.style_select').val()),
-						color_select: ($('.color_select').val())
+						color_select: ($('.color_select').val()),
+						group1_age_multiselect:
+							($('.group1-age-multiselect').val()),
+						group1_test_browser_multiselect:
+							($('.group1-test-browser-multiselect').val()),
+						group1_test_os_multiselect:
+							($('.group1-test-os-multiselect').val()),
+						group1_primary_os_multiselect:
+							($('.group1-primary-os-multiselect').val()),
+						group1_primary_mobile_multiselect:
+							($('.group1-primary-mobile-multiselect').val()),
+						group2_age_multiselect:
+							($('.group2-age-multiselect').val()),
+						group2_test_browser_multiselect:
+							($('.group2-test-browser-multiselect').val()),
+						group2_test_os_multiselect:
+							($('.group2-test-os-multiselect').val()),
+						group2_primary_os_multiselect:
+							($('.group2-primary-os-multiselect').val()),
+						group2_primary_mobile_multiselect:
+							($('.group2-primary-mobile-multiselect').val())
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);

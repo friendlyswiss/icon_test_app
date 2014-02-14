@@ -25,7 +25,7 @@
 
   <%= form_for(@session) do |f| %>
 
-  	<%= f.hidden_field :test_browser, value: (browser.name.downcase + " " + browser.version), class: "test-browser" %>
+  	<%= f.hidden_field :test_browser, value: (browser.name.downcase), class: "test-browser" %>
   	<%= f.hidden_field :test_os, value: browser.platform, class: "test-os" %>
 		<%= f.submit "Loading images...", class: "start-test btn btn-large btn-primary", disabled: true %>
 	<% end %>

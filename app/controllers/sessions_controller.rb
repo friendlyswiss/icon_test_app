@@ -42,6 +42,7 @@ class SessionsController < ApplicationController
 	end
 
 	def show
+		
 		@session = Session.friendly.find(params[:id])
 		
 		#average for participant's 24 trials
@@ -51,7 +52,11 @@ class SessionsController < ApplicationController
 		#remove sessions with over 5 wrong answers
 		#remove sessions with trials over 20 seconds
 		cleaned_sessions = Session.where("session_complete = ? AND success_rate_normalized >= ? AND outliers_present = ?", true, 0.75, false)
-		
+
+		@valid_trials = Trial.joins(:session).where('sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?', true, 0.75, false)
+
+		#Trial.joins(:session).where(session: {session_complete: true})
+
 		#Create an array of average task times for all cleaned participants' latter 20 questions
 		@avg_task_times = []
 		cleaned_sessions.each do |session|
@@ -84,12 +89,13 @@ class SessionsController < ApplicationController
 
 	
 	def index
-		
 		sid = params[:sid]
 		my_session = Session.find(sid)
-		cleaned_sessions = Session.all #plus some cleaning
+		#remove outliers
 		group2_data = nil
 		group1_name = 'Me'
+
+		group1_where_params = "age = ? AND test_browser = ?"
 
 		#Pull from completed session or filter on all people
 		if params[:group1_is] == 'me'
@@ -97,25 +103,27 @@ class SessionsController < ApplicationController
 			group1_data = my_session.my_results(params[:speed_accuracy_select],params[:style_select],params[:color_select])
 
 		elsif params[:group1_is] == 'all_people'
+			valid_trials_for_selected_group1 = Trial.joins(:session).where('sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?', true, 0.75, false) #plus more conditions from group1 params
 			group1_name = 'Group 1'
-			group1_data = [4,3,2,1]
-				#cleaned_sessions.results(params[:speed_accuracy_select],params[:style_select],params[:color_select])					
+			group1_data = valid_trials_for_selected_group1.results(params[:speed_accuracy_select],params[:style_select],params[:color_select])					
 		end
 		
 		#Group 2 only gets filtered if it's showing
-		if params[:no_groups] == 2
-			#group2_data = cleaned_sessions.my_results(params[:speed_accuracy],params[:style],params[:color])
+		if params[:no_groups] == '2'
+			valid_trials_for_selected_group2 = Trial.joins(:session).where('sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?', true, 0.75, false) #plus more conditions from group2 params
+			group2_data = valid_trials_for_selected_group2.results(params[:speed_accuracy_select],params[:style_select],params[:color_select])
+			group2_data.pop; group2_data.pop
 		end
 		
 		title = group1_data.pop
 		labels = group1_data.pop
-
+		
 		series1 = {name: group1_name, data: group1_data}
-		series2 = {name: 'Group 2', data: [1,2,3,4]} #group2_data}]
 
 		if params[:no_groups] == '1'
 			series = [series1]
 		else
+			series2 = {name: 'Group 2', data: group2_data}
 			series = [series1, series2]
 		end
 		
@@ -161,6 +169,7 @@ class SessionsController < ApplicationController
 	end
 
 	
+
 
 	private
 
