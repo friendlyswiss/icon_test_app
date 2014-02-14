@@ -47,15 +47,8 @@ class SessionsController < ApplicationController
 		
 		#average for participant's 24 trials
 		@avg_task_time = (@session.trials.average("task_time") / 1000)
-		
-		#remove incomplete sessions
-		#remove sessions with over 5 wrong answers
-		#remove sessions with trials over 20 seconds
+
 		cleaned_sessions = Session.where("session_complete = ? AND success_rate_normalized >= ? AND outliers_present = ?", true, 0.75, false)
-
-		@valid_trials = Trial.joins(:session).where('sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?', true, 0.75, false)
-
-		#Trial.joins(:session).where(session: {session_complete: true})
 
 		#Create an array of average task times for all cleaned participants' latter 20 questions
 		@avg_task_times = []
@@ -91,11 +84,51 @@ class SessionsController < ApplicationController
 	def index
 		sid = params[:sid]
 		my_session = Session.find(sid)
-		#remove outliers
 		group2_data = nil
 		group1_name = 'Me'
+		group1_query = ["sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?", true, 0.75, false]
+		group2_query = ["sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?", true, 0.75, false]
 
-		group1_where_params = "age = ? AND test_browser = ?"
+		if params[:group1_age_multiselect] != 'all'
+			group1_query[0] << " AND age = ?"
+			group1_query << params[:group1_age_multiselect]
+		end
+		if params[:group1_test_browser_multiselect] != 'any'
+			group1_query[0] << " AND test_browser = ?"
+			group1_query << params[:group1_test_browser_multiselect]
+		end
+		if params[:group1_test_os_multiselect] != 'any'
+			group1_query[0] << " AND test_os = ?"
+			group1_query << params[:group1_test_os_multiselect]
+		end
+		if params[:group1_primary_os_multiselect] != 'any'
+			group1_query[0] << " AND primary_os = ?"
+			group1_query << params[:group1_primary_os_multiselect]
+		end
+		if params[:group1_primary_mobile_multiselect] != 'any'
+			group1_query[0] << " AND primary_mobile = ?"
+			group1_query << params[:group1_primary_mobile_multiselect]
+		end
+		if params[:group2_age_multiselect] != 'all'
+			group2_query[0] << " AND age = ?"
+			group2_query << params[:group2_age_multiselect]
+		end
+		if params[:group2_test_browser_multiselect] != 'any'
+			group2_query[0] << " AND test_browser = ?"
+			group2_query << params[:group2_test_browser_multiselect]
+		end
+		if params[:group2_test_os_multiselect] != 'any'
+			group2_query[0] << " AND test_os = ?"
+			group2_query << params[:group2_test_os_multiselect]
+		end
+		if params[:group2_primary_os_multiselect] != 'any'
+			group2_query[0] << " AND primary_os = ?"
+			group2_query << params[:group2_primary_os_multiselect]
+		end
+		if params[:group2_primary_mobile_multiselect] != 'any'
+			group2_query[0] << " AND primary_mobile = ?"
+			group2_query << params[:group2_primary_mobile_multiselect]
+		end
 
 		#Pull from completed session or filter on all people
 		if params[:group1_is] == 'me'
@@ -103,15 +136,17 @@ class SessionsController < ApplicationController
 			group1_data = my_session.my_results(params[:speed_accuracy_select],params[:style_select],params[:color_select])
 
 		elsif params[:group1_is] == 'all_people'
-			valid_trials_for_selected_group1 = Trial.joins(:session).where('sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?', true, 0.75, false) #plus more conditions from group1 params
+			valid_trials_for_selected_group1 = Trial.joins(:session).where(group1_query)
+
 			group1_name = 'Group 1'
-			group1_data = valid_trials_for_selected_group1.results(params[:speed_accuracy_select],params[:style_select],params[:color_select])					
+			group1_data = valid_trials_for_selected_group1.results(params[:speed_accuracy_select], params[:style_select], params[:color_select])					
 		end
 		
 		#Group 2 only gets filtered if it's showing
 		if params[:no_groups] == '2'
-			valid_trials_for_selected_group2 = Trial.joins(:session).where('sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?', true, 0.75, false) #plus more conditions from group2 params
-			group2_data = valid_trials_for_selected_group2.results(params[:speed_accuracy_select],params[:style_select],params[:color_select])
+			valid_trials_for_selected_group2 = Trial.joins(:session).where(group2_query)
+			
+			group2_data = valid_trials_for_selected_group2.results(params[:speed_accuracy_select], params[:style_select], params[:color_select])
 			group2_data.pop; group2_data.pop
 		end
 		
