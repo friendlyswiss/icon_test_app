@@ -13,17 +13,29 @@
 	<% #Fastest Trials %>
 	<div class="superlative-trial fastest">
 		<h3>Fastest Trials</h3>
+		<% if @fastest[0].task_success == true %>
+			<% trial_display = "correct" %>
+		<% else %>
+			<% trial_display = "incorrect" %>
+			<% @incorrect_notice = "incorrect_notice" %>
+		<% end %>
 		<div class="fastest-trial trial">
 			<%= image_tag("form#{@fastest[0].target_form}-#{@fastest[0].style}-#{@fastest[0].color}.png") %>
-			<p><strong><%= "#{@fastest[0].task_time.to_f / 1000}"%></strong> seconds
+			<p><span class=<%= trial_display %>><%= "#{@fastest[0].task_time.to_f / 1000}"%></span> seconds
 			<br />
 			<span class="superlative">FASTEST</span></p>
 		</div>
 		<% i = 1 %>
 		<% 4.times do %>
+		<% if @fastest[i].task_success == true %>
+			<% trial_display = "correct" %>
+		<% else %>
+			<% trial_display = "incorrect" %>
+			<% @incorrect_notice = "incorrect_notice" %>
+		<% end %>
 		<div class="trial">
 			<%= image_tag("form#{@fastest[i].target_form}-#{@fastest[i].style}-#{@fastest[i].color}.png") %>
-			<p><strong><%= "#{@fastest[i].task_time.to_f / 1000}"%></strong> sec
+			<p><span class=<%= trial_display %>><%= "#{@fastest[i].task_time.to_f / 1000}"%></span> sec
 			</p>
 		</div>
 		<% i += 1 %>
@@ -33,22 +45,35 @@
 	<% #Slowest Trials %>
 	<div class="superlative-trial slowest">
 		<h3>Slowest Trials</h3>
+		<% if @slowest[0].task_success == true %>
+			<% trial_display = "correct" %>
+		<% else %>
+			<% trial_display = "incorrect" %>
+			<% @incorrect_notice = "incorrect_notice" %>
+		<% end %>
 		<div class="slowest-trial trial">
 			<%= image_tag("form#{@slowest[0].target_form}-#{@slowest[0].style}-#{@slowest[0].color}.png") %>
-			<p><strong><%= "#{@slowest[0].task_time.to_f / 1000}"%></strong> seconds
+			<p><span class=<%= trial_display %>><%= "#{@slowest[0].task_time.to_f / 1000}"%></span> seconds
 			<br />
 			<span class="superlative">SLOWEST</span></p>
 			</p>
 		</div>
 		<% i = 1 %>
 		<% 4.times do %>
+		<% if @slowest[i].task_success == true %>
+			<% trial_display = "correct" %>
+		<% else %>
+			<% trial_display = "incorrect" %>
+			<% @incorrect_notice = "incorrect_notice" %>
+		<% end %>
 		<div class="trial">
 			<%= image_tag("form#{@slowest[i].target_form}-#{@slowest[i].style}-#{@slowest[i].color}.png") %>
-			<p><strong><%= "#{@slowest[i].task_time.to_f / 1000}"%></strong> sec
+			<p><span class=<%= trial_display %>><%= "#{@slowest[i].task_time.to_f / 1000}"%></span> sec
 			</p>
 		</div>
 		<% i += 1 %>
 		<% end %>
+		<p class=<%= "#{@incorrect_notice}" %>>* Italic indicates incorrect selection</p>
 	</div>
 
 

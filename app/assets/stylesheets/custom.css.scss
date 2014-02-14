@@ -344,6 +344,12 @@ div#results {
     .trial {
       margin-bottom:15px;
       padding-left:10px;
+      span.correct {
+        font-weight:bold;
+      }
+      span.incorrect {
+        font-style:italic;
+      }
     }
     .fastest-trial, .slowest-trial {
       img {
@@ -360,6 +366,10 @@ div#results {
         }
       }
     }
+    .incorrect_notice {
+    font-style:italic;
+    font-size:14px;
+  }
   }
   .fastest {
     margin-right:100px;

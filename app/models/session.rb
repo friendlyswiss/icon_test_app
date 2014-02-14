@@ -12,7 +12,7 @@ class Session < ActiveRecord::Base
 			title = "Speed"
 
 			if style == 'both' && color == 'both'
-				labels = ["Solid Black","Hollow Black","Solid White","Hollow White"]
+				labels = ["Solid Black" ,"Hollow Black","Solid White","Hollow White"]
 				groupdata = [
 					((self.trials.where("style = ? AND color = ?", 'solid', 'white_bg').average('task_time').to_f / 1000).round(3)),
 					((self.trials.where("style = ? AND color = ?", 'hollow', 'white_bg').average('task_time').to_f / 1000).round(3)),

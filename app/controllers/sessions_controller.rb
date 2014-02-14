@@ -44,6 +44,7 @@ class SessionsController < ApplicationController
 	def show
 		
 		@session = Session.friendly.find(params[:id])
+		@incorrect_notice = "hidden"
 		
 		#average for participant's 24 trials
 		@avg_task_time = (@session.trials.average("task_time") / 1000)
@@ -162,7 +163,11 @@ class SessionsController < ApplicationController
 			series = [series1, series2]
 		end
 		
-		
+		if params[:speed_accuracy_select] == 'speed'
+			yaxis = {	type: "linear",	title: { text: "Time (seconds)"	}, labels: { format: '{value} sec'}	}
+		elsif params[:speed_accuracy_select] == 'accuracy'
+			yaxis = {	type: "linear",	title: { text: "Percent Correct"	}, labels: { format: '{value}%'}, max: 100	}
+		end
 
 		@chart_options = {
 			chart: {
@@ -179,14 +184,10 @@ class SessionsController < ApplicationController
 					categories: labels,
 					title: {
 						text: "Icon Style/Color Combinations"
-					}
+					},
+					useHTML: true				
 				},
-				yAxis: {
-					type: "linear",
-					title: {
-						text: "Time"
-					}
-				},
+				yAxis: yaxis,
 
 				series: series,
 
