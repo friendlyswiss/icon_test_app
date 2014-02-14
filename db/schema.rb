@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214190354) do
+ActiveRecord::Schema.define(version: 20140214191923) do
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140214190354) do
     t.datetime "updated_at"
     t.integer  "task_time"
     t.string   "random_id"
+    t.integer  "session_id"
   end
 
 end
