@@ -39,7 +39,7 @@ class TrialsController < ApplicationController
 			redirect_to trial_path(next_trial)
 		
     else
-			session = Session.find(@trial.session_id)
+			session = @trial.session
       session_success_rate = session.trials.where(:task_success => true).count.to_f / 24
       session_success_rate_normalized = session.trials.where("task_success = ? AND sequence_order >= ?", true, 5).count.to_f / 20
 
