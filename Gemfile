@@ -6,7 +6,6 @@ gem 'bootstrap-sass', '2.3.2.0'
 gem 'browser'
 gem 'friendly_id', '~> 5.0.0'
 gem "highcharts-rails", "~> 3.0.0"
-gem 'bootstrap-multiselect-rails', :git => 'https://github.com/benjamincanac/bootstrap-multiselect-rails.git'
 gem 'sass-rails', '4.0.1'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.1'

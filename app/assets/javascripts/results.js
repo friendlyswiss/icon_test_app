@@ -2,6 +2,16 @@ $(document).ready(function() {
 	
 	if ($('#results').length){
 		
+		var axisImages = function() { 
+			$('.solid-black').after('<img class="axis-image" src="/assets/eye-icon-solid-white_bg.png" />')
+			$('.hollow-black').after('<img class="axis-image" src="/assets/eye-icon-hollow-white_bg.png" />')
+			$('.solid-white').after('<img class="axis-image" src="/assets/eye-icon-solid-black_bg.png" />')
+			$('.hollow-white').after('<img class="axis-image" src="/assets/eye-icon-hollow-black_bg.png" />')
+			$('.solid').after('<img class="axis-image double" src="/assets/eye-icon-solid.png" />')
+			$('.hollow').after('<img class="axis-image double" src="/assets/eye-icon-hollow.png" />')
+			$('.black').after('<img class="axis-image double" src="/assets/eye-icon-white_bg.png" />')
+			$('.white').after('<img class="axis-image double" src="/assets/eye-icon-black_bg.png" />')
+		};
 		var group1_is = 'me';
 		var no_groups = '1';
 		var sid = $('#results').attr("class");
@@ -24,6 +34,7 @@ $(document).ready(function() {
 			$(function() {
 				$('#chart-container').highcharts(chart_options);
 				console.log(chart_options);
+				axisImages();
 			});
 		});
 
@@ -79,6 +90,7 @@ $(document).ready(function() {
 				},
 				function(chart_options) {
 				$('#chart-container').highcharts(chart_options);
+				axisImages();
 			});
 		}));
 		
@@ -121,6 +133,7 @@ $(document).ready(function() {
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
+					axisImages();
 				});
 	    }
 	    else {
@@ -159,6 +172,7 @@ $(document).ready(function() {
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
+					axisImages();
 				});
 	    }
 	  });
@@ -202,6 +216,7 @@ $(document).ready(function() {
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
+					axisImages();
 				});
 			} else {
 				no_groups = 1;
@@ -239,6 +254,7 @@ $(document).ready(function() {
 					},
 					function(chart_options) {
 					$('#chart-container').highcharts(chart_options);
+					axisImages();
 				});
 			}
 		});

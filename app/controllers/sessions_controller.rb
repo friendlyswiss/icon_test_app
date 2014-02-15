@@ -169,6 +169,8 @@ class SessionsController < ApplicationController
 			yaxis = {	type: "linear",	title: { text: "Percent Correct"	}, labels: { format: '{value}%'}, max: 100	}
 		end
 
+		#show_images = { formatter: function() { return "<img src=\'/assets/eye-icon-solid-white_bg.png\' />" }, useHTML: true }
+
 		@chart_options = {
 			chart: {
 					type: 'column',
@@ -183,9 +185,10 @@ class SessionsController < ApplicationController
 				xAxis: {
 					categories: labels,
 					title: {
-						text: "Icon Style/Color Combinations"
+						text: "Icon Style/Color Combinations",
+						margin:70
 					},
-					useHTML: true				
+					labels: { useHTML: true }
 				},
 				yAxis: yaxis,
 
@@ -199,6 +202,7 @@ class SessionsController < ApplicationController
 					enabled: false
 				}
 			}
+
 		respond_to do |format|
 			format.json { render :json => @chart_options }
 		end

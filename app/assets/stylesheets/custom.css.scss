@@ -459,6 +459,17 @@ div#results {
       font-family: "Helvetica Neue";
     }
   }
+  .xaxis {
+    display: block;
+  }
+  .axis-image {
+    width:40px;
+    display:block;
+    margin:auto;
+  }
+  .axis-image.double {
+    width:57px;
+  }
 }
 
 

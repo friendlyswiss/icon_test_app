@@ -12,7 +12,7 @@ class Session < ActiveRecord::Base
 			title = "Speed"
 
 			if style == 'both' && color == 'both'
-				labels = ["Solid Black" ,"Hollow Black","Solid White","Hollow White"]
+				labels = ["<span class=\'xaxis solid-black\'>Solid Black</span>" ,"<span class=\'xaxis hollow-black\'>Hollow Black</span>","<span class=\'xaxis solid-white\'>Solid White</span>","<span class=\'xaxis hollow-white\'>Hollow White</span>"]
 				groupdata = [
 					((self.trials.where("style = ? AND color = ?", 'solid', 'white_bg').average('task_time').to_f / 1000).round(3)),
 					((self.trials.where("style = ? AND color = ?", 'hollow', 'white_bg').average('task_time').to_f / 1000).round(3)),
@@ -25,14 +25,14 @@ class Session < ActiveRecord::Base
 				groupdata = [(self.trials.average('task_time').to_f / 1000).round(3)]
 			
 			elsif style == 'both' && color == 'either'
-				labels = ["Solid", "Hollow"]				
+				labels = ["<span class=\'xaxis solid\'>Solid</span>", "<span class=\'xaxis hollow\'>Hollow</span"]				
 				groupdata = [
 					((self.trials.where(style: 'solid').average('task_time').to_f / 1000).round(3)),
 					((self.trials.where(style: 'hollow').average('task_time').to_f / 1000).round(3))
 				]
 
 			elsif style == 'either' && color == 'both'
-				labels = ["Black on White", "White on Black"]	
+				labels = ["<span class=\'xaxis black\'>Black on White</span>", "<span class=\'xaxis white\'>White on Black</span>"]	
 				groupdata = [
 					((self.trials.where(color: 'white_bg').average('task_time').to_f / 1000).round(3)),
 					((self.trials.where(color: 'black_bg').average('task_time').to_f / 1000).round(3))
