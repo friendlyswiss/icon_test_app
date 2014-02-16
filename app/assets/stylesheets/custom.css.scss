@@ -461,14 +461,32 @@ div#results {
   }
   .xaxis {
     display: block;
+    min-width:57px;
   }
   .axis-image {
-    width:40px;
+    width:30px;
     display:block;
     margin:auto;
   }
   .axis-image.double {
     width:57px;
+  }
+}
+.no_chart_data {      
+   position: absolute;
+   width:720px;
+   height:420px;
+   background-color: rgba(0,0,0,.7);
+   z-index: 99;
+   div.no_data_warning {
+    background:#fff;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top: -75px;
+    margin-left: -165px;
+    padding:15px;
+    width:300px;
   }
 }
 
@@ -492,9 +510,9 @@ div#small-screen-scrim {
     top:50%;
     left:50%;
     margin-top: -100px;
-    margin-left: -165px;
+    margin-left: -190px;
     padding:15px;
-    width:300px;
+    width:350px;
   }
 }
 

@@ -3,7 +3,6 @@
 <div id="results" class="<%= "#{@session.id}" %>">
 	
 	<h2>Results</h2>
-
 	<% #Number Correct %>
 	<p class="results-text">You selected <strong><%= "#{@session.trials.where(task_success: true).count}"%> out of 24</strong> icons correctly with an average speed of <strong><%= "#{@avg_task_time.round(3)}" %> seconds</strong>.</p>
 	
@@ -260,7 +259,15 @@
 			<span>GROUP 2</span>
 		</div>
 		
-		<div id="chart-container"></div>
+		<div>
+			<div class="no_chart_data hidden">
+				<div class="no_data_warning">
+					<p class="g1_no_data hidden">No data for Group 1. Try setting less restrictive filters.</p>
+					<p class="g2_no_data hidden">No data for Group 2. Try setting less restrictive filters.</p>
+				</div>
+			</div>
+			<div id="chart-container"></div>
+		</div>
 
 	</div>
 </div>

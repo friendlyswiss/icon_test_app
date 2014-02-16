@@ -58,12 +58,14 @@ class SessionsController < ApplicationController
 		end
 		
 		#Step through each average task time to find percentile
-		@speed_percentile = nil
 		@avg_task_times.sort.reverse.each_with_index do |task_time, index|
 			if @avg_task_time > task_time
-				@speed_percentile = ((index.to_f / @avg_task_times.length.to_f)*100).round(1)
-			else @speed_percentile = 100
-			end	
+				@speed_percentile = ((index.to_f / @avg_task_times.length.to_f)*100).round(0)
+				break
+			end
+		end
+		if @speed_percentile == nil
+			@speed_percentile = 100
 		end
 		
 		@fastest = @session.trials.order("task_time ASC").limit(5)
@@ -186,7 +188,8 @@ class SessionsController < ApplicationController
 					categories: labels,
 					title: {
 						text: "Icon Style/Color Combinations",
-						margin:70
+						offset:60,
+						align:'middle'
 					},
 					labels: { useHTML: true }
 				},
@@ -207,9 +210,6 @@ class SessionsController < ApplicationController
 			format.json { render :json => @chart_options }
 		end
 	end
-
-	
-
 
 	private
 

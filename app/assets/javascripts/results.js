@@ -12,6 +12,23 @@ $(document).ready(function() {
 			$('.black').after('<img class="axis-image double" src="/assets/eye-icon-white_bg.png" />')
 			$('.white').after('<img class="axis-image double" src="/assets/eye-icon-black_bg.png" />')
 		};
+
+		var groupDataCheck = function(chart_options) {
+			$('.no_chart_data').addClass('hidden');
+			$('p.g1_no_data').addClass('hidden');
+			$('p.g2_no_data').addClass('hidden')
+			if (chart_options.series[0].data[0] == 0) {
+				$('.no_chart_data').removeClass('hidden');
+				$('p.g1_no_data').removeClass('hidden')
+			}
+			if (chart_options.series[1]) {
+				if (chart_options.series[1].data[0] == 0) {
+					$('.no_chart_data').removeClass('hidden');
+					$('p.g2_no_data').removeClass('hidden')
+				}
+			}
+		};
+
 		var group1_is = 'me';
 		var no_groups = '1';
 		var sid = $('#results').attr("class");
@@ -32,9 +49,8 @@ $(document).ready(function() {
 			},
 			function(chart_options) {
 			$(function() {
-				$('#chart-container').highcharts(chart_options);
+				var chart = $('#chart-container').highcharts(chart_options);
 				console.log(chart_options);
-				axisImages();
 			});
 		});
 
@@ -89,8 +105,10 @@ $(document).ready(function() {
 						($('.group2-primary-mobile-multiselect').val())
 				},
 				function(chart_options) {
-				$('#chart-container').highcharts(chart_options);
+				var chart = $('#chart-container').highcharts(chart_options);
+				console.log(chart_options);
 				axisImages();
+				groupDataCheck(chart_options);
 			});
 		}));
 		
@@ -132,8 +150,10 @@ $(document).ready(function() {
 							($('.group2-primary-mobile-multiselect').val())
 					},
 					function(chart_options) {
-					$('#chart-container').highcharts(chart_options);
+					var chart = $('#chart-container').highcharts(chart_options);
+					console.log(chart_options);
 					axisImages();
+					groupDataCheck(chart_options);
 				});
 	    }
 	    else {
@@ -171,8 +191,10 @@ $(document).ready(function() {
 							($('.group2-primary-mobile-multiselect').val())
 					},
 					function(chart_options) {
-					$('#chart-container').highcharts(chart_options);
+					var chart = $('#chart-container').highcharts(chart_options);
+					console.log(chart_options);
 					axisImages();
+					groupDataCheck(chart_options);
 				});
 	    }
 	  });
@@ -215,8 +237,10 @@ $(document).ready(function() {
 							($('.group2-primary-mobile-multiselect').val())
 					},
 					function(chart_options) {
-					$('#chart-container').highcharts(chart_options);
+					var chart = $('#chart-container').highcharts(chart_options);
+					console.log(chart_options);
 					axisImages();
+					groupDataCheck(chart_options);
 				});
 			} else {
 				no_groups = 1;
@@ -253,8 +277,10 @@ $(document).ready(function() {
 							($('.group2-primary-mobile-multiselect').val())
 					},
 					function(chart_options) {
-					$('#chart-container').highcharts(chart_options);
+					var chart = $('#chart-container').highcharts(chart_options);
+					console.log(chart_options);
 					axisImages();
+					groupDataCheck(chart_options);
 				});
 			}
 		});
