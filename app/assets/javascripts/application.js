@@ -18,4 +18,4 @@
 //= require highcharts/highcharts-more
 //= require PxLoader
 //= require PxLoaderImage
-//= require bootstrap-multiselect
+//= require jquery.sharer

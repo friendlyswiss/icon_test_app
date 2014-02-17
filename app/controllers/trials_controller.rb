@@ -7,7 +7,7 @@ class TrialsController < ApplicationController
   	@trial = Trial.friendly.find(params[:id])
   	@trial_form = [
   		"",
-  		"Trash",
+  		"Trash Can",
   		"Cloud",
   		"Flag",
   		"Lock",

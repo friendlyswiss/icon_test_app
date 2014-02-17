@@ -198,7 +198,7 @@ class SessionsController < ApplicationController
 				series: series,
 
 				colors: [
-				   '#00bcdf',
+				   '#04c4f4',
 				   '#ed145b'
 				],
 				credits: {

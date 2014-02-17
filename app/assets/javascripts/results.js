@@ -50,6 +50,7 @@ $(document).ready(function() {
 			function(chart_options) {
 			$(function() {
 				var chart = $('#chart-container').highcharts(chart_options);
+				axisImages();
 				console.log(chart_options);
 			});
 		});
@@ -285,7 +286,7 @@ $(document).ready(function() {
 			}
 		});
 		
-		
+		$("#sharer-container").sharer();
 
 	}	
 });

@@ -4,8 +4,8 @@
 <% if @trial.sequence_order == 1 %>
 	<div class="scrim top">
 		<div id="pre-test-instructions">
-			<h3>The Icons</h3>
-			<p>The 20 icons shown below will be used in this test. Take as much time as you need to familiarize yourself with each icon and its title. When you are ready to begin the test, click Start Test.</p>
+				<h3>The Icons</h3>
+				<p>Shown below are the 20 icons used in this test. Take as much time as you need now to familiarize yourself with each icon and its name. When you are ready to begin the test, click the button below.</p>
 			<% i = 1 %>
 			<% 20.times do %>
 				<div class="titled-icon">
@@ -17,7 +17,7 @@
 				</div>
 				<% i += 1 %>
 			<% end %>
-			<button id="test-start" class="btn btn-default">Start Test</button>
+			<button id="test-start" class="btn btn-custom btn-default">Begin First Trial</button>
 		</div>
 	</div>
 <% end %>
@@ -25,8 +25,8 @@
 <div class="scrim middle">
 	<div id="pre-trial-box" class="grey-bg">
 		<h4 class="text-center">Trial <%= "#{@trial.sequence_order}" %> of 24</h4>
-		<p>When you are ready, press Start to begin the trial. A word will appear in the center of the screen surrounded by 20 different icons. Balancing speed and accuracy, select the icon that matches the word.</p>
-		<button id="trial-start" class="btn btn-default">Start</button>
+		<p>When you are ready, press Start to begin the timed trial. A word will appear in the center of the screen surrounded by 20 randomly positioned icons. Balancing speed and accuracy, select the icon that matches the word.</p>
+		<button id="trial-start" class="btn btn-custom btn-default">Start</button>
 	</div>
 </div>
 
