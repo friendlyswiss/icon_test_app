@@ -7,7 +7,7 @@
     <%= form_for @session do |f| %>
 
       <h5>Your age range:</h5>
-      <%= f.select(:age, [["18–25","18-25"],["26–40","26-40"],["41–60","41-60"],["Above 60",">60"]],{prompt: true},:required => true) %>
+      <%= f.select(:age, [["18–25","18-25"],["26–40","26-40"],["41–60","41-60"],["Above 60","60_older"]],{prompt: true},:required => true) %>
       
       <h5>The desktop operating system that you are most comfortable using:</h5>
       <%= f.select(:primary_os, [["Windows","windows"],["Mac","mac"],["Linux","linux"],["Other","other"],["I don't know","dont-know"]],{prompt: true},:required => true) %>

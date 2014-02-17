@@ -45,8 +45,8 @@ $.sharer = {
 		"class": "sharer-icon-%network.id%",
 		"label": "Share on %network.name%",
 		"title": "Icon Recognition Test",
-		"description": "Take the Test",
-		"url": "http://icontest.net"
+		"description": "Take the test to help measure the impact of icon style on recognition speed and accuracy",
+		"url": "http://www.icon-test.net"
 	}
 };
 

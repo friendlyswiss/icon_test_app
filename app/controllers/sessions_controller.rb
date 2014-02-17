@@ -93,43 +93,28 @@ class SessionsController < ApplicationController
 		group2_query = ["sessions.session_complete = ? AND sessions.success_rate_normalized >= ? AND sessions.outliers_present = ?", true, 0.75, false]
 
 		if params[:group1_age_multiselect] != 'all'
-			group1_query[0] << " AND age = ?"
+			group1_query[0] << " AND sessions.age = ?"
 			group1_query << params[:group1_age_multiselect]
 		end
-		if params[:group1_test_browser_multiselect] != 'any'
-			group1_query[0] << " AND test_browser = ?"
-			group1_query << params[:group1_test_browser_multiselect]
-		end
-		if params[:group1_test_os_multiselect] != 'any'
-			group1_query[0] << " AND test_os = ?"
-			group1_query << params[:group1_test_os_multiselect]
-		end
 		if params[:group1_primary_os_multiselect] != 'any'
-			group1_query[0] << " AND primary_os = ?"
+			group1_query[0] << " AND sessions.primary_os = ?"
 			group1_query << params[:group1_primary_os_multiselect]
 		end
 		if params[:group1_primary_mobile_multiselect] != 'any'
-			group1_query[0] << " AND primary_mobile = ?"
+			group1_query[0] << " AND sessions.primary_mobile = ?"
 			group1_query << params[:group1_primary_mobile_multiselect]
 		end
+
 		if params[:group2_age_multiselect] != 'all'
-			group2_query[0] << " AND age = ?"
+			group2_query[0] << " AND sessions.age = ?"
 			group2_query << params[:group2_age_multiselect]
 		end
-		if params[:group2_test_browser_multiselect] != 'any'
-			group2_query[0] << " AND test_browser = ?"
-			group2_query << params[:group2_test_browser_multiselect]
-		end
-		if params[:group2_test_os_multiselect] != 'any'
-			group2_query[0] << " AND test_os = ?"
-			group2_query << params[:group2_test_os_multiselect]
-		end
 		if params[:group2_primary_os_multiselect] != 'any'
-			group2_query[0] << " AND primary_os = ?"
+			group2_query[0] << " AND sessions.primary_os = ?"
 			group2_query << params[:group2_primary_os_multiselect]
 		end
 		if params[:group2_primary_mobile_multiselect] != 'any'
-			group2_query[0] << " AND primary_mobile = ?"
+			group2_query[0] << " AND sessions.primary_mobile = ?"
 			group2_query << params[:group2_primary_mobile_multiselect]
 		end
 

@@ -32,8 +32,11 @@ class TrialsController < ApplicationController
 
 	def update
 		@trial = Trial.friendly.find(params[:id])
-		@trial.update_attributes(trial_params)
 		
+    if @trial.task_time == nil
+      @trial.update_attributes(trial_params)
+		end
+
     if @trial.sequence_order < 24
 			next_trial = Trial.find(@trial.id + 1)
 			redirect_to trial_path(next_trial)

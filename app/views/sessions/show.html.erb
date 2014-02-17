@@ -2,7 +2,7 @@
 
 <div id="results" class="<%= "#{@session.id}" %>">
 	
-	<h2>Results</h2>
+	<h2>Your Results</h2>
 	<% #Number Correct %>
 	<p class="results-text">You selected <strong><%= "#{@session.trials.where(task_success: true).count}"%> out of 24</strong> icons correctly with an average speed of <strong><%= "#{@avg_task_time.round(3)}" %> seconds</strong>.</p>
 	
@@ -91,23 +91,20 @@
 					['speed', 'speed'],
 					['accuracy', 'accuracy']], 'speed'),:class => 'speed_accuracy_select' %>
 				
-				for icons with 
+				for icons, showing <strong>styles</strong> <%= image_tag("eye-icon-white_bg-vertical.png", class: 'inline-icon') %>
 				
 				<%= select_tag :style, options_for_select([
-					['both styles', 'both'],
-					['either style', 'either']
+					['separately', 'both'],
+					['combined', 'either']
 					], 'both'),:class => 'style_select' %>
 				
-				<% #<span class="style-text">styles</span> %>
-
-				and 
+				and <strong>colors</strong> <%= image_tag("eye-icon-solid-vertical.png", class: 'inline-icon') %>
 				
 				 <%= select_tag :color, options_for_select([
-				 	['both colors', 'both'],
-				 	['either color', 'either']
+				 	['separately', 'both'],
+				 	['combined', 'either']
 				 	], 'both'),:class => 'color_select' %>
 				 
-				<% #<span class="color-text">colors</span> %>
 			</p>
 		</div>
 
@@ -133,38 +130,14 @@
 						], 'all'),
 						:class => 'group1-age-multiselect' %>
 					
-					who took this test using
-					
-					<%= select_tag :group1_test_browser, options_for_select([
-						['any browser', 'any'],
-						["Chrome","chrome"],
-						["Safari","safari"],
-						["Firefox","firefox"],
-						["IE","ie"],
-						["Opera","opera"],
-						["other browser","other"]
-						], 'any'),
-						:class => 'group1-test-browser-multiselect' %>
-
-					from
-					
-					<%= select_tag :group1_test_os, options_for_select([
-						['any computer', 'any'],
-						["Windows computer","ios"],
-						["Mac computer","android"],
-						["Linux computer","linux"],
-						["other computer","other"]
-						], 'any'),
-						:class => 'group1-test-os-multiselect' %>
-
-					who are most comfortable using 
+					who use 
 					
 					<%= select_tag :group1_primary_os, options_for_select([
 						['any desktop OS', 'any'],
 						["Windows","windows"],
 						["Mac","mac"],
 						["Linux","linux"],
-						["other desktop OS","other"]
+						["another desktop OS","other"]
 						], 'any'),
 						:class => 'group1-primary-os-multiselect' %>
 
@@ -176,7 +149,7 @@
 						["Android","android"],
 						["Windows Mobile","windows-mobile"],
 						["BlackBerry","blackberry"],
-						["other mobile OS","other"]
+						["another mobile OS","other"]
 						], 'any'),
 						:class => 'group1-primary-mobile-multiselect' %>
 					
@@ -205,39 +178,15 @@
 						['older than 60', '60_older']
 						], 'all'),
 						:class => 'group2-age-multiselect' %>
-					
-					who took this test using
-					
-					<%= select_tag :group2_test_browser, options_for_select([
-						['any browser', 'any'],
-						["Chrome","chrome"],
-						["Safari","safari"],
-						["Firefox","firefox"],
-						["IE","ie"],
-						["Opera","opera"],
-						["other browser","other"]
-						], 'any'),
-						:class => 'group2-test-browser-multiselect' %>
 
-					from
-					
-					<%= select_tag :group2_test_os, options_for_select([
-						['any computer', 'any'],
-						["Windows computer","ios"],
-						["Mac computer","android"],
-						["Linux computer","linux"],
-						["other computer","other"]
-						], 'any'),
-						:class => 'group2-test-os-multiselect' %>
-
-					who are most comfortable using 
+					who use 
 					
 					<%= select_tag :group2_primary_os, options_for_select([
 						['any desktop OS', 'any'],
 						["Windows","windows"],
 						["Mac","mac"],
 						["Linux","linux"],
-						["other desktop OS","other"]
+						["another desktop OS","other"]
 						], 'any'),
 						:class => 'group2-primary-os-multiselect' %>
 
@@ -249,7 +198,7 @@
 						["Android","android"],
 						["Windows Mobile","windows-mobile"],
 						["BlackBerry","blackberry"],
-						["other mobile OS","other"]
+						["another mobile OS","other"]
 						], 'any'),
 						:class => 'group2-primary-mobile-multiselect' %>
 					
@@ -262,8 +211,8 @@
 		<div id="chart-group">
 			<div class="no_chart_data hidden">
 				<div class="no_data_warning">
-					<p class="g1_no_data hidden">No data for Group 1. Try setting less restrictive filters.</p>
-					<p class="g2_no_data hidden">No data for Group 2. Try setting less restrictive filters.</p>
+					<p class="g1_no_data hidden">No data for <strong>Group 1</strong>. Try setting less restrictive filters.</p>
+					<p class="g2_no_data hidden">No data for <strong>Group 2</strong>. Try setting less restrictive filters.</p>
 				</div>
 			</div>
 			<div id="chart-container"></div>
@@ -273,11 +222,14 @@
 	
 	<% #Sharing Options %>
 	<div class="sharing">
-		<h4>Invite your friends to take the Icon Recognition Test</h4>
+		<h4>Help improve this study's data quality – invite others to take the test:</h4>
 		<div id="sharer-container"></div>
-		<div class="email-signup">
-			<p><a href="http://eepurl.com/OAXF1">Sign up</a> to receive an email when the full study results are published. (This is completely optional and is not a part of the test.)</p>
+	</div>
+	<div class="email-signup">
+			<p><a href="http://eepurl.com/OAXF1" target="_blank">Sign up</a> to receive an email when the full study results are published.</p>
 		</div>
+	<div class="image-credits">
+		<p><strong>Image credits:</strong> Solid and hollow versions of trash can, cloud, flag, lock, radio, shopping cart, trophy, tools, and eye icons from Tab Bar Icons iOS 7 Volumes 1–3 by <a href="pixeden.com" target="_blank">Pixeden.com</a>. Solid versions of cog, person, and camera icons by <a href="http://modernuiicons.com/" target="_blank">modernuiicons.com</a>. Solid versions of microphone, magnifying glass, phone, thumbs up, scissors, star, key, and tags icons by <a href="http://developer.android.com/design/style/iconography.html" target="_blank">Android Developer Style Guidelines</a>. Solid and hollow versions of speech bubble icons by <a href="https://medium.com/design-ux/a93647e5a44b" target="_blank">Aubrey Johnson</a>. Social icons by <a href="http://dribbble.com/shots/1056675-Social-Media-Icons" target="_blank">Luke Taylor</a>.</p>
 	</div>
 
 </div>
