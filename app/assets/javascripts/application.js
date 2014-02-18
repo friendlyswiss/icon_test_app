@@ -19,3 +19,4 @@
 //= require PxLoader
 //= require PxLoaderImage
 //= require jquery.sharer
+//= require analytics
