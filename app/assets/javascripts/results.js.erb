@@ -1,16 +1,17 @@
 $(document).ready(function() {
 	
 	if ($('#results').length){
-		
+
+
 		var axisImages = function() { 
-			$('.solid-black').after('<img class="axis-image" src="/assets/eye-icon-solid-white_bg.png" />')
-			$('.hollow-black').after('<img class="axis-image" src="/assets/eye-icon-hollow-white_bg.png" />')
-			$('.solid-white').after('<img class="axis-image" src="/assets/eye-icon-solid-black_bg.png" />')
-			$('.hollow-white').after('<img class="axis-image" src="/assets/eye-icon-hollow-black_bg.png" />')
-			$('.solid').after('<img class="axis-image double" src="/assets/eye-icon-solid.png" />')
-			$('.hollow').after('<img class="axis-image double" src="/assets/eye-icon-hollow.png" />')
-			$('.black').after('<img class="axis-image double" src="/assets/eye-icon-white_bg.png" />')
-			$('.white').after('<img class="axis-image double" src="/assets/eye-icon-black_bg.png" />')
+			$('.solid-black').after("<img class='axis-image' src=<%= asset_path 'eye-icon-solid-white_bg.png' %> />")
+			$('.hollow-black').after("<img class='axis-image' src=<%= asset_path 'eye-icon-hollow-white_bg.png' %> />")
+			$('.solid-white').after("<img class='axis-image' src=<%= asset_path 'eye-icon-solid-black_bg.png' %> />")
+			$('.hollow-white').after("<img class='axis-image' src=<%= asset_path 'eye-icon-hollow-black_bg.png' %> />")
+			$('.solid').after("<img class='axis-image double' src=<%= asset_path 'eye-icon-solid.png' %> />")
+			$('.hollow').after("<img class='axis-image double' src=<%= asset_path 'eye-icon-hollow.png' %> />")
+			$('.black').after("<img class='axis-image double' src=<%= asset_path 'eye-icon-white_bg.png' %> />")
+			$('.white').after("<img class='axis-image double' src=<%= asset_path 'eye-icon-black_bg.png' %> />")
 		};
 
 		var groupDataCheck = function(chart_options) {
