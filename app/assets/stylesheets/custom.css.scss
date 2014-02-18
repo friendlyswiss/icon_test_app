@@ -112,6 +112,11 @@ div.homepage {
     margin:auto;
     width:140px;
   }
+  .eye-icons {
+    display:block;
+    margin:auto;
+    width:300px;
+  }
   .info-sheet {
     overflow:scroll;
     resize:vertical;
@@ -512,7 +517,7 @@ div#results {
   margin-bottom:150px;
   .no_chart_data {      
      position: absolute;
-     width:720px;
+     width:740px;
      height:420px;
      background-color: rgba(0,0,0,.7);
      z-index: 99;
@@ -523,8 +528,11 @@ div#results {
       left:50%;
       margin-top: -75px;
       margin-left: -190px;
-      padding:15px;
+      padding:10px;
       width:350px;
+      p {
+        margin:5px 0;
+      }
     }
   }
 }
@@ -535,7 +543,7 @@ div#results {
   }
 }
 #sharer-container {
-  margin:50px auto 160px auto;
+  margin:30px auto 200px auto;
   padding-left:200px;
 }
 .email-signup {

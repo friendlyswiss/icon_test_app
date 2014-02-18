@@ -4,11 +4,11 @@ $.sharer = {
 	"networks": {
 		"facebook": {
 			"name": "Facebook",
-			"url": "http://www.facebook.com/share.php?u=%url%"
+			"url": "http://www.facebook.com/share.php?u=%url%&title=%title%"
 		},
 		"twitter": {
 			"name": "Twitter",
-			"url": "https://twitter.com/share?url=%url%&text=%title%+%description%"
+			"url": "https://twitter.com/share?url=%url%&text=%description%"
 		},
 		"linkedin": {
 			"name": "LinkedIn",
