@@ -578,7 +578,7 @@ div#small-screen-scrim {
   }
 }
 
-@media (min-width: 740px){
+@media (min-width: 740px) and (min-height: 700px){
 
   #small-screen-scrim {
     display:none;
