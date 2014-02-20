@@ -18,12 +18,12 @@ $(document).ready(function() {
 			$('.no_chart_data').addClass('hidden');
 			$('p.g1_no_data').addClass('hidden');
 			$('p.g2_no_data').addClass('hidden')
-			if (chart_options.series[0].data[0] == 0) {
+			if (!(chart_options.series[0].data[0]) || (chart_options.series[0].data[0] == 0)){
 				$('.no_chart_data').removeClass('hidden');
 				$('p.g1_no_data').removeClass('hidden')
 			}
 			if (chart_options.series[1]) {
-				if (chart_options.series[1].data[0] == 0) {
+				if (!(chart_options.series[1].data[0]) || (chart_options.series[1].data[0] == 0)) {
 					$('.no_chart_data').removeClass('hidden');
 					$('p.g2_no_data').removeClass('hidden')
 				}
