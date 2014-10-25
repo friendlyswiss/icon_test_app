@@ -71,25 +71,21 @@ class SessionsController < ApplicationController
 
 		#Calculate the average task time from the session.
 		@avg_task_time = (@session.trials.average("task_time") / 1000)
-		
+
+
+		#------REMOVED FOR PERFORMANCE IMPROVEMENTS-------
+
 		#Create an array of average task times for all sessions
 		
-		#------REMOVED FOR PERFORMANCE IMPROVEMENTS-------
 		#Include avg task time for all sessions by all users where all trials are completed, the success rate for trials 5-24 is >75%, and no trials longer than 20 seconds exist.
 		# @avg_task_times = []
 		# cleaned_sessions = Session.where("session_complete = ? AND success_rate_normalized >= ? AND outliers_present = ?", true, 0.75, false)
 		# cleaned_sessions.each do |session|
 		# 	@avg_task_times << (session.trials.where(sequence_order: 5..24).average('task_time').to_f / 1000)	
 		# end
-		
-		#------ADDED FOR PERFORMANCE IMPROVEMENTS-------
-		#Static data from official study dataset: no warmups, no outliers (99.7%)
-		#Times in 20 quantiles: 100th percentile (fastest) time, 95th percentile time, 90th percentile time, etc.
-		@avg_task_times = [13803, 5908, 4771, 4192, 3802, 3511, 3276, 3074, 2903, 2740, 2597, 2465, 2333, 2211, 2097, 1983, 1872, 1762, 1643, 1501, 927]
 
 		#Step through each average task time to find percentile score.
 		
-		#------REMOVED FOR PERFORMANCE IMPROVEMENTS-------
 		# @avg_task_times.sort.reverse.each_with_index do |task_time, index|
 		# 	if @avg_task_time > task_time
 		# 		@speed_percentile = ((index.to_f / @avg_task_times.length.to_f)*100).round(0)
@@ -100,16 +96,28 @@ class SessionsController < ApplicationController
 		# 	@speed_percentile = 100
 		# end
 	
-	#------ADDED FOR PERFORMANCE IMPROVEMENTS-------
+	
+		#------ADDED FOR PERFORMANCE IMPROVEMENTS-------
+
+
+		#Create an array of average task times for all sessions
+		
+		#Static data from official study dataset: no warmups, no outliers (99.7%)
+		#Times in 20 quantiles: 100th percentile (fastest) time, 95th percentile time, 90th percentile time, etc.
+		@avg_task_times = [13803, 5908, 4771, 4192, 3802, 3511, 3276, 3074, 2903, 2740, 2597, 2465, 2333, 2211, 2097, 1983, 1872, 1762, 1643, 1501, 927]
+		
+		#Step through each average task time to find percentile score.
+
 		@avg_task_times.each_with_index do |task_time, index|
-			if @avg_task_time > task_time
-				@speed_percentile = index * 5
-				break
+				if @avg_task_time * 1000 > task_time
+					@speed_percentile = index * 5
+					break
+				end
 			end
-		end
-		if @speed_percentile == nil
-			@speed_percentile = 100
-		end
+			if @speed_percentile == nil
+				@speed_percentile = 100
+			end
+
 	end
 
 	def edit
