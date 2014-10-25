@@ -1,23 +1,34 @@
 class SessionsController < ApplicationController
 	respond_to :html, :json
 
+
 	def new
 		@session = Session.new
 	end
 
+
+	#CREATE A SESSION AND ITS 24 TRIALS
 	def create
 		@session = Session.new(session_params)
 
+		#Generate a random ID for the new session
 		o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
-		rando = (0...6).map { o[rand(o.length)] }.join
-		@session.random_id = rando
-
+		random_id = (0...6).map { o[rand(o.length)] }.join
+		@session.random_id = random_id
+		
+		@session.session_complete = false
 		@session.save
 
-		#Create 24 trials
-		i = 0
-		form = ((1..20).to_a.sample 4).concat((1..20).to_a.shuffle)
+		#CREATE 24 TRIALS
+
+		#Create an array of 24 integers representing the target icon form for each trial in this session.
+		#The first four integers are selected randomly from 1-20 (without repeating any).
+		#Then the next 20 integers are selected randomly from 1-20 (without repeating any).
+		target_forms = ((1..20).to_a.sample 4).concat((1..20).to_a.shuffle)
 		
+		#Create an array of 24 style-color combinations for the 24 trials.
+		#Each of the first four trials is assigned a unique, non-repeating style-color combination.
+		#Each of the style-color combinations appears five more times over the next 20 trials, in a random order.
 		style_color = Array[
 				Array["solid", "white_bg"],
 				Array["hollow", "white_bg"],
@@ -29,35 +40,46 @@ class SessionsController < ApplicationController
 					Array.new(5, Array["solid", "black_bg"])).concat(
 					Array.new(5, Array["hollow", "black_bg"])).shuffle
 				)
-
+		
+		#Construct 24 new trials with information from the above arrays		
+		i = 0
 		while i < 24 do
+			
+			#Generate a random ID for each new trial
 			o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
-			rando = (0...6).map { o[rand(o.length)] }.join
-			@session.trials.create(:random_id => rando, :sequence_order => i + 1, :target_form => form[i], :style => style_color[i][0], :color => style_color[i][1])
+			random_id = (0...6).map { o[rand(o.length)] }.join
+
+			@session.trials.create(:random_id => random_id, :sequence_order => i + 1, :target_form => target_forms[i], :style => style_color[i][0], :color => style_color[i][1])
 			i += 1
 		end
 
-		#Redirect to first trial
+		#After all 24 trials are constructed, redirect the user to the first trial
 		redirect_to trial_path(@session.trials.find_by(sequence_order: 1))
 	end
 
+	#CALCULATE DATA FOR RESULTS SCREEN
 	def show
 		
 		@session = Session.friendly.find(params[:id])
 		@incorrect_notice = "hidden"
+
+		#Get the participant's fastest and slowest five trials
+		@fastest = @session.trials.order("task_time ASC").limit(5)
+		@slowest = @session.trials.order("task_time DESC").limit(5)
 		
-		#average for participant's 24 trials
+		#CALCULATE THE PERCENTILE SCORE FOR THE SESSION
+
+		#Calculate the average task time from the session.
 		@avg_task_time = (@session.trials.average("task_time") / 1000)
-
-		cleaned_sessions = Session.where("session_complete = ? AND success_rate_normalized >= ? AND outliers_present = ?", true, 0.75, false)
-
-		#Create an array of average task times for all cleaned participants' latter 20 questions
+		
+		#Create an array of average task times for all sessions by all users where all trials are completed, the success rate for trials 5-24 is >75%, and no trials longer than 20 seconds exist.
 		@avg_task_times = []
+		cleaned_sessions = Session.where("session_complete = ? AND success_rate_normalized >= ? AND outliers_present = ?", true, 0.75, false)
 		cleaned_sessions.each do |session|
 			@avg_task_times << (session.trials.where(sequence_order: 5..24).average('task_time').to_f / 1000)	
 		end
 		
-		#Step through each average task time to find percentile
+		#Step through each average task time to find percentile score.
 		@avg_task_times.sort.reverse.each_with_index do |task_time, index|
 			if @avg_task_time > task_time
 				@speed_percentile = ((index.to_f / @avg_task_times.length.to_f)*100).round(0)
@@ -67,23 +89,23 @@ class SessionsController < ApplicationController
 		if @speed_percentile == nil
 			@speed_percentile = 100
 		end
-		
-		@fastest = @session.trials.order("task_time ASC").limit(5)
-		@slowest = @session.trials.order("task_time DESC").limit(5)
-
 	end
+
 
 	def edit
 		@session = Session.friendly.find(params[:id])
 	end
 
+
+	#SUBMIT QUESTIONNAIRE RESPONSES
 	def update
 		@session = Session.friendly.find(params[:id])
 		@session.update_attributes(session_params)
 		redirect_to results_path(@session)
 	end
 
-	
+
+	#GET DATA FOR CHART ON RESULTS PAGE
 	def index
 		sid = params[:sid]
 		my_session = Session.find(sid)
@@ -156,8 +178,6 @@ class SessionsController < ApplicationController
 			yaxis = {	type: "linear",	title: { text: "Percent Correct"	}, labels: { format: '{value}%'}, max: 100	}
 		end
 
-		#show_images = { formatter: function() { return "<img src=\'/assets/eye-icon-solid-white_bg.png\' />" }, useHTML: true }
-
 		@chart_options = {
 			chart: {
 					type: 'column',
@@ -195,6 +215,7 @@ class SessionsController < ApplicationController
 			format.json { render :json => @chart_options }
 		end
 	end
+
 
 	private
 
