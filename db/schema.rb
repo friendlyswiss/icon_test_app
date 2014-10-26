@@ -13,6 +13,25 @@
 
 ActiveRecord::Schema.define(version: 20140214191923) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "cleaned_trials", id: false, force: true do |t|
+    t.integer "id"
+    t.integer "session_id"
+    t.integer "sequence_order"
+    t.string  "target_form"
+    t.string  "style"
+    t.string  "color"
+    t.boolean "task_success"
+    t.integer "task_time"
+    t.string  "age"
+    t.string  "test_browser"
+    t.string  "test_os"
+    t.string  "primary_os"
+    t.string  "primary_mobile"
+  end
+
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -21,10 +40,10 @@ ActiveRecord::Schema.define(version: 20140214191923) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "sessions", force: true do |t|
     t.datetime "created_at"
@@ -41,6 +60,19 @@ ActiveRecord::Schema.define(version: 20140214191923) do
     t.boolean  "session_complete"
   end
 
+  create_table "thinned_trials", force: true do |t|
+    t.integer  "sequence_order"
+    t.string   "target_form"
+    t.string   "style"
+    t.string   "color"
+    t.boolean  "task_success"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "task_time"
+    t.string   "random_id"
+    t.integer  "session_id"
+  end
+
   create_table "trials", force: true do |t|
     t.integer  "sequence_order"
     t.string   "target_form"
@@ -52,6 +84,22 @@ ActiveRecord::Schema.define(version: 20140214191923) do
     t.integer  "task_time"
     t.string   "random_id"
     t.integer  "session_id"
+  end
+
+  create_table "trials_with_session_info_with_incompletes", id: false, force: true do |t|
+    t.integer "id"
+    t.integer "session_id"
+    t.integer "sequence_order"
+    t.string  "target_form"
+    t.string  "style"
+    t.string  "color"
+    t.boolean "task_success"
+    t.integer "task_time"
+    t.string  "age"
+    t.string  "test_browser"
+    t.string  "test_os"
+    t.string  "primary_os"
+    t.string  "primary_mobile"
   end
 
 end
