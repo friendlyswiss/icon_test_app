@@ -13,6 +13,7 @@ class Session < ActiveRecord::Base
 
 			if style == 'both' && color == 'both'
 				labels = ["<span class=\'xaxis solid-black\'>Solid Black</span>" ,"<span class=\'xaxis hollow-black\'>Hollow Black</span>","<span class=\'xaxis solid-white\'>Solid White</span>","<span class=\'xaxis hollow-white\'>Hollow White</span>"]
+				
 				groupdata = [
 					((self.trials.where("style = ? AND color = ?", 'solid', 'white_bg').average('task_time').to_f / 1000).round(3)),
 					((self.trials.where("style = ? AND color = ?", 'hollow', 'white_bg').average('task_time').to_f / 1000).round(3)),
